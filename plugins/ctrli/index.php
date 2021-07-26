@@ -3,6 +3,8 @@
 Esses dados são enviados apenas para estatística de instalação do projeto, nenhum outro dado é enviado além da data e dados pertinentes à versão.
 Também é enviado o município que fez a instalação. Nenhum outra informação é enviada.
 */
+ini_set('display_errors', 0 );
+error_reporting(0);
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;

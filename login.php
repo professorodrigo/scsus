@@ -5,6 +5,8 @@
 //   Rodrigo Silva
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ini_set('display_errors', 0 );
+error_reporting(0);
 
 header("Cache-Control: no-store, no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0", false);
