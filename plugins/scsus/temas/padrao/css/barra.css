@@ -1,0 +1,65 @@
+.main-barra-imagem {
+	background-color: #66FF33;
+	text-align: center;
+	vertical-align: middle;
+}
+.main-barra-nome {
+	font-size: 24px;
+	font-weight: bold;
+	color: #009900;
+	background-color: #66FF33;
+	text-align: center;
+	vertical-align: middle;
+}
+.main-barra-versao {
+
+	font-size: 18px;
+	font-weight: bold;
+	color: #009900;
+	background-color: #66FF33;
+	text-align: center;
+	vertical-align: middle;
+}
+.main-barra-table {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	border: 3px solid #66FF33;
+
+}
+.main-bairra-icones {
+	text-align: center;
+	vertical-align: middle;
+}
+.main-barra-doar {
+	font-size: 10px;
+	color: #009900;
+	text-align: right;
+	vertical-align: middle;
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #66FF33;
+
+}
+.main-barra-usuario {
+	font-weight: bold;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 14px;
+	color: #009900;
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #66FF33;
+
+}
+.main-barra-versiculo {
+	font-style: italic;
+	color: #009900;
+	text-align: center;
+	vertical-align: middle;
+}
+.main-barra-superior {
+	color: #009900;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #66FF33;
+}

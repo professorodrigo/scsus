@@ -1,0 +1,51 @@
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #333333;
+}
+table {
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #006600;
+}
+.dado {
+	text-align: center;
+	vertical-align: middle;
+	font-size: 12px;
+	font-weight: bold;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #00CC99;
+}
+.valor {
+	text-align: center;
+	vertical-align: middle;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #00CC99;
+}
+.valor1 {
+	text-align: center;
+	vertical-align: top;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #00CC99;
+}
+a {
+	color: #006600;
+	text-decoration: none;
+}
+.titulo {
+	text-align: center;
+	vertical-align: middle;
+	font-size: 16px;
+	font-weight: bold;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #00CC99;
+}
+.tabela2 {
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #00CC99;
+}

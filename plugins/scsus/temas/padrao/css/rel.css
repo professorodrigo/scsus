@@ -1,0 +1,688 @@
+.corpo {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #333333;
+	left: 5px;
+	top: 5px;
+	right: 5px;
+	bottom: 5px;
+}
+.logo {
+	background-position: center center;
+	text-align: center;
+	vertical-align: middle;
+}
+.cabeca-titulo {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: middle;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #666666;
+}
+.cabeca-endereco {
+	vertical-align: middle;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #666666;
+	font-size: 12px;
+}
+.cabeca-fone {
+	font-size: 12px;
+	text-align: center;
+	vertical-align: middle;
+}
+.cabeca-borda-baixo {
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #666666;
+}
+.cabeca-tabela {
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #666666;
+}
+.cabeca-pagina {
+	font-size: 12px;
+	text-align: right;
+	vertical-align: middle;
+}
+.relatorio-tabela {
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #666666;
+}
+.relatorio-titulo {
+	font-size: 16px;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: middle;
+}
+.relatorio-periodo {
+	font-size: 14px;
+	text-align: center;
+	vertical-align: middle;
+}
+.relatorio-pagina {
+	font-size: 12px;
+	text-align: center;
+	vertical-align: middle;
+}
+.rodape-tabela {
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #666666;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #666666;
+
+}
+.rodape-texto {
+	font-size: 12px;
+	color: #666666;
+	text-align: center;
+	vertical-align: middle;
+}
+.lista-cabeca {
+	font-size: 12px;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #666666;
+	text-align: center;
+	vertical-align: middle;
+}
+.lista-dado1-centro {
+	font-size: 12px;
+	text-align: center;
+	vertical-align: middle;
+}
+.lista-dado1-esquerdo {
+	font-size: 12px;
+	text-align: left;
+	vertical-align: middle;
+	text-indent: 2pt;
+}
+.lista-equipe {
+	font-size: 12px;
+	font-weight: normal;
+	text-align: left;
+	text-indent: 3pt;
+	vertical-align: middle;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #666666;
+}
+.lista-sub-dados {
+	font-size: 10px;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #999999;
+	text-align: center;
+	vertical-align: middle;
+}
+.lista-dado2-centro {
+	font-size: 10px;
+	text-align: center;
+	vertical-align: middle;
+}
+.lista-dado2-centro-A {
+	font-size: 10px;
+	background-color: #FFCCFF;
+	text-align: center;
+	vertical-align: middle;
+}
+.lista-dado2-centro-B {
+	font-size: 10px;
+	text-align: center;
+	vertical-align: middle;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #666666;
+
+}
+.lista-sub-dados-B {
+	font-size: 10px;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #999999;
+	text-align: center;
+	vertical-align: middle;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #666666;
+
+}
+.lista-status-Vermelho {
+	font-size: 9px;
+	font-weight: bold;
+	color: #FF0000;
+	background-color: #FFCCFF;
+	text-align: center;
+	vertical-align: middle;
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-top-color: #666666;
+	border-left-color: #666666;
+
+}
+.lista-status-Azul {
+	font-size: 9px;
+	font-weight: bold;
+	color: #0000FF;
+	background-color: #66CCFF;
+	text-align: center;
+	vertical-align: middle;
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-top-color: #666666;
+	border-left-color: #666666;
+}
+.lista-status-Amarelo {
+	font-size: 9px;
+	font-weight: bold;
+	color: #FF6600;
+	background-color: #FFFF00;
+	text-align: center;
+	vertical-align: middle;
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-top-color: #666666;
+	border-left-color: #666666;
+}
+.lista-status-Verde {
+	font-size: 9px;
+	font-weight: bold;
+	color: #006600;
+	background-color: #66FF66;
+	text-align: center;
+	vertical-align: middle;
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-top-color: #666666;
+	border-left-color: #666666;
+}
+.lista-status {
+	font-size: 9px;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: middle;
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-top-color: #666666;
+	border-left-color: #666666;
+}
+.lista-equipe2 {
+	font-size: 9px;
+	font-weight: normal;
+	text-align: right;
+	vertical-align: middle;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #666666;
+}
+.linha-zebrada {
+	background-color: #CCCCCC;
+}
+.indicador-titulo {
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: middle;
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-top-color: #666666;
+	border-left-color: #666666;
+}
+.indicador-c1 {
+	font-size: 11px;
+	text-align: left;
+	text-indent: 3pt;
+	vertical-align: middle;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #666666;
+}
+.indicador-cx {
+	font-size: 11px;
+	text-align: left;
+	text-indent: 3pt;
+	vertical-align: middle;
+}
+.indicador-c1-SIM {
+	font-size: 11px;
+	text-align: center;
+	vertical-align: middle;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #666666;
+	background-color: #33FF00;
+	font-weight: bold;
+}
+.indicador-c1-SIM-B {
+	font-size: 11px;
+	text-align: center;
+	vertical-align: middle;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #666666;
+	background-color: #33FF00;
+	font-weight: bold;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #666666;
+}
+.indicador-c1-SIM-amarelo {
+	font-size: 11px;
+	text-align: center;
+	vertical-align: middle;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #666666;
+	background-color: #FFCC00;
+	font-weight: bold;
+}
+.indicador-c1-SIM-amarelo-B {
+	font-size: 11px;
+	text-align: center;
+	vertical-align: middle;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #666666;
+	background-color: #FFCC00;
+	font-weight: bold;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #666666;
+}
+.indicador-c1-NAO {
+	font-size: 11px;
+	text-align: center;
+	vertical-align: middle;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #666666;
+	background-color: #FF3300;
+	font-weight: bold;
+}
+.indicador-c1-NAO-B {
+	font-size: 11px;
+	text-align: center;
+	vertical-align: middle;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #666666;
+	background-color: #FF3300;
+	font-weight: bold;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #666666;
+}
+.indicador-cx-SIM {
+	font-size: 11px;
+	text-align: center;
+	vertical-align: middle;
+	background-color: #33FF00;
+	font-weight: bold;
+
+}
+.indicador-cx-NAO {
+	font-size: 11px;
+	text-align: center;
+	vertical-align: middle;
+	background-color: #FF3300;
+	font-weight: bold;
+
+}
+.indicador-titulo-Amarelo {
+	font-size: 12px;
+	font-weight: bold;
+	background-color: #FFCC00;
+	text-align: center;
+	vertical-align: middle;
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-top-color: #666666;
+	border-left-color: #666666;
+}
+.indicador-titulo-Verde {
+
+	font-size: 12px;
+	font-weight: bold;
+	background-color: #33FF00;
+	text-align: center;
+	vertical-align: middle;
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-top-color: #666666;
+	border-left-color: #666666;
+}
+.indicador-titulo-Vermelho {
+	font-size: 12px;
+	font-weight: bold;
+	background-color: #FF3300;
+	text-align: center;
+	vertical-align: middle;
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-top-color: #666666;
+	border-left-color: #666666;
+}
+.consultas-titulo {
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: middle;
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-top-color: #666666;
+	border-left-color: #666666;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #666666;
+
+}
+.consultas-cabecado {
+	font-size: 10px;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #999999;
+	text-align: center;
+	vertical-align: middle;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #666666;
+
+}
+.consultas-dados-centro {
+	font-size: 10px;
+	text-align: center;
+	vertical-align: middle;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #666666;
+
+}
+.consultas-dados-centro-B {
+	font-size: 10px;
+	text-align: center;
+	vertical-align: middle;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #666666;
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #666666;
+
+}
+.consultas-dados-esquerda {
+	font-size: 10px;
+	text-align: left;
+	vertical-align: middle;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #666666;
+	text-indent: 3pt;
+
+}
+.lista-sub-dados-BB {
+	font-size: 10px;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #999999;
+	text-align: center;
+	vertical-align: middle;
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #666666;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #666666;
+
+
+}
+.lista-dado2-centro-BB {
+	font-size: 10px;
+	text-align: center;
+	vertical-align: middle;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #666666;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-bottom-color: #666666;
+	border-left-color: #666666;
+
+}
+.lista-dado1-centro-B {
+	font-size: 12px;
+	text-align: center;
+	vertical-align: middle;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #666666;
+
+}
+.lista-dado1-esquerdo-B {
+	font-size: 12px;
+	text-align: left;
+	vertical-align: middle;
+	text-indent: 2pt;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #666666;
+
+}
+.lista-dado1-centro-BB {
+	font-size: 12px;
+	text-align: center;
+	vertical-align: middle;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #666666;
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #666666;
+
+}
+.indicador-c1-centro-X {
+	font-size: 10px;
+	text-align: center;
+	vertical-align: middle;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #666666;
+	color: #999999;
+
+}
+.consultas-contador {
+	color: #CCCCCC;
+	text-align: right;
+	vertical-align: middle;
+	font-size: 9px;
+}
+.resumo-sub-titulo {
+	font-size: 14px;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: middle;
+}
+.resumo-v-numerador {
+	font-size: 12px;
+	font-weight: normal;
+	text-align: center;
+	vertical-align: middle;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-bottom-color: #666666;
+	border-left-color: #666666;
+
+}
+.resumo-numerador {
+
+	font-size: 14px;
+	font-weight: bold;
+	text-align: right;
+	vertical-align: middle;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #666666;
+}
+.resumo-denominador {
+	font-size: 14px;
+	font-weight: bold;
+	text-align: right;
+	vertical-align: middle;
+
+}
+.resumo-v-denominador {
+	font-size: 14px;
+	font-weight: normal;
+	text-align: center;
+	vertical-align: middle;
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #666666;
+
+}
+.indicador-titulo-Amarelo-B {
+	font-size: 12px;
+	font-weight: bold;
+	background-color: #FFCC00;
+	text-align: center;
+	vertical-align: middle;
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-top-color: #666666;
+	border-left-color: #666666;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #666666;
+}
+.indicador-titulo-Verde-B {
+	font-size: 12px;
+	font-weight: bold;
+	background-color: #33FF00;
+	text-align: center;
+	vertical-align: middle;
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-top-color: #666666;
+	border-left-color: #666666;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #666666;
+}
+.indicador-titulo-Vermelho-B {
+	font-size: 12px;
+	font-weight: bold;
+	background-color: #FF3300;
+	text-align: center;
+	vertical-align: middle;
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-top-color: #666666;
+	border-left-color: #666666;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #666666;
+}
+.indicador-c1-centro-X-B {
+	font-size: 10px;
+	text-align: center;
+	vertical-align: middle;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #666666;
+	color: #999999;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #666666;
+
+}
+.indicador-c1-B {
+	font-size: 11px;
+	text-align: left;
+	text-indent: 3pt;
+	vertical-align: middle;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #666666;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #666666;
+
+}
+.indicador-cx-B {
+	font-size: 11px;
+	text-align: left;
+	text-indent: 3pt;
+	vertical-align: middle;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #666666;
+
+}
+.procedimentos-tabela {
+	font-size: 10px;
+}
+.procedimentos-cabeca {
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #CCCCCC;
+	text-align: center;
+	vertical-align: middle;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #666666;
+}
+.procedimentos-dado {
+	font-weight: normal;
+	color: #666666;
+	text-align: center;
+	vertical-align: middle;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #666666;
+}
+.procedimentos-dado-amarelo {
+	font-weight: normal;
+	color: #666666;
+	text-align: center;
+	background-color: #FFFF00;
+	vertical-align: middle;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #666666;
+}
