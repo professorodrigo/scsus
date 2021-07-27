@@ -634,9 +634,9 @@ if ($nm_sql_1 > 0){
 				FROM 
 					tb_cidadao 
 				WHERE 
-					no_cidadao = '".$cidadao_nome."' AND 
-					dt_nascimento = '".$cidadao_nascimento."' AND 
-					no_mae = '".$cidadao_mae."'
+					no_cidadao = '".$result1['no_cidadao']."' AND 
+					dt_nascimento = '".$result1['dt_nascimento']."' AND 
+					no_mae = '".$result1['no_mae']."'
 			";
 			$run_cca = pg_query($cdb,$pega_cca);
 			if (pg_num_rows($run_cca) > 0){
