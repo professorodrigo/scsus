@@ -143,36 +143,30 @@ if ($gpa == 1){
 	$dti = date('Ymd');
 	$dtf = date('Ymd');
 }
-$idade_inicial = 0;
-$idade_final = 1;
 $imunos = "22,42";
 // -----------------------------------------------------------------------
-$a_dti = (int) substr($dti,0,4);
-$a_dtix = $a_dti;
-$m_dti = substr($dti,4,2);
-$d_dti = substr($dti,6,2);
-$a_dti = $a_dti - $idade_final;
-// -----------------------------------------------------------------------
-$a_dtf = (int) substr($dtf,0,4);
-$a_dtfx = $a_dtf;
-$m_dtf = substr($dtf,4,2);
-$d_dtf = substr($dtf,6,2);
-$a_dtf = $a_dtf - $idade_inicial;
-// -----------------------------------------------------------------------
-//$dti_nas = $a_dti.'-'.$m_dti.'-'.$d_dti;
-$dti_nas = $a_dti.'-'.$m_dtf.'-'.$d_dtf;
-$dtf_nas = $a_dtf.'-'.$m_dtf.'-'.$d_dtf;
-// -----------------------------------------------------------------------
-/*
-$a_dti = (int) substr($dti,0,4);
-$a_dtf = (int) substr($dtf,0,4);
-$m_dtf = substr($dtf,4,2);
-$d_dtf = substr($dtf,6,2);
-$a_dtfx = $a_dtf - $idade_final - 1;
-$a_dtix = $a_dtf - $idade_inicial;
-$dti_nas = $a_dtfx.'-'.$m_dtf.'-'.$d_dtf;
-$dtf_nas = $a_dtix.'-'.$m_dtf.'-'.$d_dtf;
-*/
+if ($tpb == 12){
+	$dtf_m = datasomameses($dtf,12,'-');
+	$a_dtf = substr($dtf,0,4);
+	$m_dtf = substr($dtf,4,2);
+	$d_dtf = substr($dtf,6,2);
+	$a_dtf_m = substr($dtf_m,0,4);
+	$m_dtf_m = substr($dtf_m,4,2);
+	$d_dtf_m = substr($dtf_m,6,2);
+	$dti_nas = $a_dtf_m.'-'.$m_dtf_m.'-'.$d_dtf_m;
+	$dtf_nas = $a_dtf.'-'.$m_dtf.'-'.$d_dtf;
+} else {
+	$dtf_m = datasomameses($dtf,12,'-');
+	$dtf_m_f = datasomameses($dtf,6,'-');
+	$a_dtf_f = substr($dtf_m_f,0,4);
+	$m_dtf_f = substr($dtf_m_f,4,2);
+	$d_dtf_f = substr($dtf_m_f,6,2);
+	$a_dtf_m = substr($dtf_m,0,4);
+	$m_dtf_m = substr($dtf_m,4,2);
+	$d_dtf_m = substr($dtf_m,6,2);
+	$dti_nas = $a_dtf_m.'-'.$m_dtf_m.'-'.$d_dtf_m;
+	$dtf_nas = $a_dtf_f.'-'.$m_dtf_f.'-'.$d_dtf_f;
+}
 // -----------------------------------------------------------------------
 $conta_geral = $pini;
 $conta_geral_desconto = $cdes;
@@ -180,6 +174,12 @@ $numerador_ind5 = $num;
 $contator_gl_hipertenso = 0;
 $contator_gl_diabetico = 0;
 $conta_gravacao = 0;
+$conta_polio_1 = 0;
+$conta_penta_1 = 0;
+$conta_polio_2 = 0;
+$conta_penta_2 = 0;
+$conta_polio_3 = 0;
+$conta_penta_3 = 0;
 // -----------------------------------------------------------------------
 $duplicados = array();
 $conta_duplicados = 0;
@@ -385,7 +385,7 @@ FROM
 		FROM 
 			tb_cidadao 
 		WHERE 
-			(dt_nascimento > '".$dti_nas."' AND dt_nascimento <= '".$dtf_nas."')
+			(dt_nascimento >= '".$dti_nas."' AND dt_nascimento <= '".$dtf_nas."')
 		ORDER BY no_cidadao, no_mae, dt_nascimento, dt_atualizado DESC
 	) AS t4
 	LEFT JOIN
@@ -556,7 +556,7 @@ FROM
 					FROM 
 						tb_fat_cad_individual
 					WHERE
-						(dt_nascimento > '".$dti_nas."' AND dt_nascimento <= '".$dtf_nas."')
+						(dt_nascimento >= '".$dti_nas."' AND dt_nascimento <= '".$dtf_nas."')
 					ORDER BY nu_cns, nu_cpf_cidadao, co_dim_tempo DESC
 				) AS t1
 				LEFT JOIN
@@ -1265,17 +1265,11 @@ if ($nm_sql_2 > 0){
 						if (trim($ims) == $ex_imuno_ar[$m]){
 
 							//$junta_vacinas = $ex1['co_dim_tempo'].$ex1['nu_cbo'].$ex1['nu_cnes'].$ex_imuno_ar[$m].$ex_dose_ar[$m].$ex_lote_ar[$m].$ex_fabricante_ar[$m];
-							$junta_vacinas = $ex1['nu_cbo'].$ex1['nu_cnes'].$ex_imuno_ar[$m].$ex_dose_ar[$m].$ex_lote_ar[$m].$ex_fabricante_ar[$m];
+							$junta_vacinas = $ex1['nu_cbo'].$ex1['nu_cnes'].$ex_imuno_ar[$m].$ex_dose_ar[$m];
 
 							if (!in_array($junta_vacinas, $duplicados_procedimentos)) {
 								$duplicados_procedimentos[$conta_duplicados_procedimentos] = $junta_vacinas;
 								$conta_duplicados_procedimentos++;
-								if ($ex_dose_ar[$m] == 3 && $ex_imuno_ar[$m] == 22){
-									$dose3_1 = true;
-								}
-								if ($ex_dose_ar[$m] == 3 && $ex_imuno_ar[$m] == 42){
-									$dose3_2 = true;
-								}
 								$sql_imu = "
 									SELECT
 										co_seq_dim_imunobiologico,
@@ -1338,19 +1332,34 @@ if ($nm_sql_2 > 0){
 								$array_procedimentos[$cont_array_procedimentos]['no_profissional'] = $ex1['no_profissional'];
 								$array_procedimentos[$cont_array_procedimentos]['tabela'] = 'tb_fat_vacinacao';
 								$cont_array_procedimentos++;
+								if ($ex_imuno_ar[$m] == '22'){
+									if ($ex_dose_ar[$m] == 1){
+										$conta_polio_1++;
+									}
+									if ($ex_dose_ar[$m] == 2){
+										$conta_polio_2++;
+									}
+									if ($ex_dose_ar[$m] == 3){
+										$conta_polio_3++;
+										$dose3_1 = true;
+									}
+								}
+								if ($ex_imuno_ar[$m] == '42'){
+									if ($ex_dose_ar[$m] == 1){
+										$conta_penta_1++;
+									}
+									if ($ex_dose_ar[$m] == 2){
+										$conta_penta_2++;
+									}
+									if ($ex_dose_ar[$m] == 3){
+										$conta_penta_3++;
+										$dose3_2 = true;
+									}
+								}
 							}
 						}
 					}
 				}
-			}
-		}
-		if ($cd3 == 'E'){
-			if ($dose3_1 && $dose3_2){
-				$dose3 = true;
-			}
-		} else {
-			if ($dose3_1 || $dose3_2){
-				$dose3 = true;
 			}
 		}
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1502,7 +1511,7 @@ if ($nm_sql_2 > 0){
 						$data_mais_vacina = dataint(substr($exmv['dt_aplicacao'],0,10));
 						
 						//$junta_vacinas = $data_mais_vacina.$exmv['co_cbo_2002'].$exmv['nu_cnes'].$exmv['co_imunobiologico'].$exmv['co_dose_imunobiologico'].$exmv['ds_lote'].$exmv['no_fabricante'];
-						$junta_vacinas = $exmv['co_cbo_2002'].$exmv['nu_cnes'].$exmv['co_imunobiologico'].$exmv['co_dose_imunobiologico'].$exmv['ds_lote'].$exmv['no_fabricante'];
+						$junta_vacinas = $exmv['co_cbo_2002'].$exmv['nu_cnes'].$exmv['co_imunobiologico'].$exmv['co_dose_imunobiologico'];
 
 						if (!in_array($junta_vacinas, $duplicados_procedimentos)) {
 							$duplicados_procedimentos[$conta_duplicados_procedimentos] = $junta_vacinas;
@@ -1524,9 +1533,42 @@ if ($nm_sql_2 > 0){
 							$array_procedimentos[$cont_array_procedimentos]['no_profissional'] = $exmv['no_profissional'];
 							$array_procedimentos[$cont_array_procedimentos]['tabela'] = 'tb_vacinacao';
 							$cont_array_procedimentos++;
+							if ($exmv['co_imunobiologico'] == '22'){
+								if ($exmv['co_dose_imunobiologico'] == 1){
+									$conta_polio_1++;
+								}
+								if ($exmv['co_dose_imunobiologico'] == 2){
+									$conta_polio_2++;
+								}
+								if ($exmv['co_dose_imunobiologico'] == 3){
+									$conta_polio_3++;
+									$dose3_1 = true;
+								}
+							}
+							if ($exmv['co_imunobiologico'] == '42'){
+								if ($exmv['co_dose_imunobiologico'] == 1){
+									$conta_penta_1++;
+								}
+								if ($exmv['co_dose_imunobiologico'] == 2){
+									$conta_penta_2++;
+								}
+								if ($exmv['co_dose_imunobiologico'] == 3){
+									$conta_penta_3++;
+									$dose3_2 = true;
+								}
+							}
 						}
 					}
 				}
+			}
+		}
+		if ($cd3 == 'E'){
+			if ($dose3_1 && $dose3_2){
+				$dose3 = true;
+			}
+		} else {
+			if ($dose3_1 || $dose3_2){
+				$dose3 = true;
 			}
 		}
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1674,16 +1716,13 @@ if ($nm_sql_2 > 0){
 			$conta_geral_desconto++;
 			$inconsistencias .= "-<br>";
 		}
+		$idade_meses = ceil(difdatas($result2['data_nascimento'],$dtf)/30)-1;
 		if ($idade <= 0 && substr($result2['data_nascimento'],-4) > date('md')){
 			$dta_sub = date('Y').substr($result2['data_nascimento'],4,4);
 			$faltam_dias = difdatas($dtf,$dta_sub);
-			$inconsistencias .= "Faltam ".ceil($faltam_dias)." dias para completar 1 ano";
-			if ($faltam_dias < 30){
+			if ($faltam_dias < 180){
 				//$statusC = "lista-status1";
-			} else {
-				if ($faltam_dias > 90){
-					//$statusC = "lista-status4";
-				}
+				$inconsistencias .= "Faltam ".ceil($faltam_dias)." dias para completar 1 ano";
 			}
 		}
 		if (strlen($inconsistencias) > 0){
@@ -1739,13 +1778,13 @@ if ($nm_sql_2 > 0){
 			<td colspan=\"2\" valign=\"top\" class=\"lista-sub-dados-B\">".$show_gp_nm2_inverso."</td>
 			<td valign=\"top\" class=\"lista-dado2-centro-B\">".$show_gp_id2_inverso."</td>
 			<td valign=\"top\" class=\"lista-sub-dados-B\">Idade</td>
-			<td valign=\"top\" class=\"lista-dado2-centro-B\">".$idade."</td>
+			<td valign=\"top\" class=\"lista-dado2-centro-B\">".$idade_meses." meses</td>
 		  </tr>
 		  <tr> 
 			<td height=\"16\"></td>
 			<td></td>
 			<td colspan=\"2\" rowspan=\"2\" valign=\"top\" class=\"".$estilo_excito_indicador."\">Indicador 5 [ ".$vacina_citopatologico." ]</td>
-			<td colspan=\"3\" rowspan=\"2\" valign=\"top\" class=\"indicador-c1-B\">Vacinação de crianças até 1 ano</td>
+			<td colspan=\"3\" rowspan=\"2\" valign=\"top\" class=\"indicador-c1-B\">Vacinação de crianças até 1 ano (".$tpb." meses)</td>
 			<td colspan=\"4\" rowspan=\"2\" valign=\"top\" class=\"indicador-c1-centro-X-B\">Imunobiológico(s): ".$imunos."</td>
 			<td colspan=\"2\" valign=\"top\" class=\"indicador-c1\">.</td>
 		  </tr>
@@ -1794,6 +1833,8 @@ if ($nm_sql_2 > 0){
 					$tbvacinacao = '*';
 				}
 				
+				$idade_meses_dose = ceil(difdatas($result2['data_nascimento'],$array_procedimentos[$i]['data'])/30)-1;
+				
 				$texto = $soma_vacinas.";".mcpf($rCPF).";".mcns($rCNS).";".dtshow($array_procedimentos[$i]['data']).";".$array_procedimentos[$i]['dose'].";".$array_procedimentos[$i]['cnes'].";".$array_procedimentos[$i]['ine'].";".$array_procedimentos[$i]['cbo'].";".$array_procedimentos[$i]['imuno'].";".$array_procedimentos[$i]['lote'].";".$array_procedimentos[$i]['fabricante'].";".$array_procedimentos[$i]['nu_cns'].";".$array_procedimentos[$i]['no_profissional'].";".$array_procedimentos[$i]['imsg'].";".$array_procedimentos[$i]['imnome'].";".$array_procedimentos[$i]['grupo'].";".$array_procedimentos[$i]['regant'].";".$array_procedimentos[$i]['tabela']."\r\n";
 				fwrite($FV, $texto);
 				
@@ -1801,7 +1842,7 @@ if ($nm_sql_2 > 0){
 						<tr> 
 						  <td height=\"18\" valign=\"top\" class=\"procedimentos-dado\">".$soma_vacinas."</td>
 						  <td valign=\"top\" class=\"procedimentos-dado\">[".$array_procedimentos[$i]['imuno']."] ".$array_procedimentos[$i]['imsg']."<br>".$array_procedimentos[$i]['imnome']."</td>
-						  <td valign=\"top\" class=\"procedimentos-dado\">".dtshow($array_procedimentos[$i]['data'])." ".$tbvacinacao."</td>
+						  <td valign=\"top\" class=\"procedimentos-dado\">".dtshow($array_procedimentos[$i]['data'])." ".$tbvacinacao."<br>".$idade_meses_dose." meses</td>
 						  <td valign=\"top\" class=\"procedimentos-dado\">".$array_procedimentos[$i]['lote']." / ".$array_procedimentos[$i]['fabricante']."<br>".$array_procedimentos[$i]['nu_cns']."</td>
 						  <td valign=\"top\" class=\"procedimentos-dado\">".$array_procedimentos[$i]['cbo']."</td>
 						  <td valign=\"top\" class=\"procedimentos-dado\">".$array_procedimentos[$i]['ine']."</td>
@@ -1910,6 +1951,12 @@ if ($paginacao <= 0 || $nm_sql_2 == 0){
 	\$num_5 = ".$numerador_ind5.";
 	\$num_prc_5 = ".$porc_ind.";
 	\$num_prc_est_5 = ".$porc_ind_est.";
+	\$num_penta_1_5 = ".$conta_penta_1.";
+	\$num_penta_2_5 = ".$conta_penta_2.";
+	\$num_penta_3_5 = ".$conta_penta_3.";
+	\$num_polio_1_5 = ".$conta_polio_1.";
+	\$num_polio_2_5 = ".$conta_polio_2.";
+	\$num_polio_3_5 = ".$conta_polio_3.";
 	\$quadri_5 = \"".qdata($dti)."\";
 	\$versao_5 = \"".$sobre['versao']."\";
 	\$banco_5 = \"".$dbdb."\";
@@ -1942,7 +1989,7 @@ if ($paginacao <= 0 || $nm_sql_2 == 0){
 	  </tr>
 	  <tr> 
 		<td height=\"30\" valign=\"top\" class=\"resumo-numerador\">Numerador&nbsp;&nbsp;</td>
-		<td valign=\"top\" class=\"resumo-v-numerador\">".$numerador_ind5." [ ".ceil($porc_ind)."% ]</td>
+		<td valign=\"top\" class=\"resumo-v-numerador\">".$numerador_ind5." [ ".ceil($porc_ind)."% ] (22d3: ".$conta_polio_3." | 42d3: ".$conta_penta_3.")</td>
 		<td></td>
 	  </tr>
 	  <tr> 

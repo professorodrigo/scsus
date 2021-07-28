@@ -45,6 +45,7 @@ $idfi = isset($_POST["idfi"]) ? trim($_POST["idfi"]) : 1;
 $imbios = isset($_POST["imbios"]) ? trim($_POST["imbios"]) : '33';
 $mcabecalho = isset($_POST["mcabecalho"]) ? trim($_POST["mcabecalho"]) : 1;
 $cfa = isset($_POST["cfa"]) ? trim($_POST["cfa"]) : 0;
+$tpb = isset($_POST["tpb"]) ? trim($_POST["tpb"]) : 12;
 $texto = "<?php
 \$dti = ".$dti.";
 \$dtf = ".$dtf.";
@@ -60,6 +61,7 @@ $texto = "<?php
 \$mcabecalho = ".$mcabecalho.";
 \$cfa = ".$cfa.";
 \$des = ".$des.";
+\$tpb = ".$tpb.";
 ?>\r\n";
 $file = "config/c_rel_v_".$_SESSION['key'].".php";
 if (file_exists($file)){unlink($file);}

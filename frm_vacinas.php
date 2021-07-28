@@ -40,6 +40,7 @@ if (file_exists("config/c_rel_v_".$_SESSION['key'].".php")){
 	$apvac = 0;
 	$cd3 = 'OU';
 	$des = 0;
+	$tpb = 12;
 }
 
 ?>
@@ -139,6 +140,24 @@ if (file_exists("config/c_rel_v_".$_SESSION['key'].".php")){
 							echo "
 							  <option value=\"OU\">OU *</option>
 							  <option value=\"E\" selected>E</option>
+							";
+						}
+						?>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Idade das crianças</label>
+                      <select class="form-control" name="tpb" id="tpb">
+						<?php
+						if ($tpb == 12){
+							echo "
+							  <option value=\"12\" selected>12 meses</option>
+							  <option value=\"6\">6 meses</option>
+							";
+						} else {
+							echo "
+							  <option value=\"12\">12 meses</option>
+							  <option value=\"6\" selected>6 meses</option>
 							";
 						}
 						?>

@@ -574,6 +574,38 @@ if (file_exists("resumo/r_ind5_".$_SESSION['key'].".php")){
 					<td><i class=\"fas fa-tint nav-icon\"></i></td>
 				</tr>
 				<tr>
+					<td><span class=\"badge bg-success\">".$num_polio_1_5."</span></td>
+					<td>[22] Polio</td>
+					<td><i class=\"fas fa-syringe nav-icon\"></i>&nbsp;&nbsp;1ª dose</td>
+				</tr>
+				<tr>
+					<td><span class=\"badge bg-success\">".$num_polio_2_5."</span></td>
+					<td>[22] Polio</td>
+					<td><i class=\"fas fa-syringe nav-icon\"></i>&nbsp;&nbsp;2ª dose</td>
+				</tr>
+				<tr>
+					<td><span class=\"badge bg-success\">".$num_polio_3_5."</span></td>
+					<td>[22] Polio</td>
+					<td><i class=\"fas fa-syringe nav-icon\">&nbsp;&nbsp;3ª dose</i></td>
+				</tr>
+				<tr>
+					<td><span class=\"badge bg-success\">".$num_penta_1_5."</span></td>
+					<td>[42] Penta</td>
+					<td><i class=\"fas fa-syringe nav-icon\"></i>&nbsp;&nbsp;1ª dose</td>
+				</tr>
+				<tr>
+					<td><span class=\"badge bg-success\">".$num_penta_2_5."</span></td>
+					<td>[42] Penta</td>
+					<td><i class=\"fas fa-syringe nav-icon\"></i>&nbsp;&nbsp;2ª dose</td>
+				</tr>
+				<tr>
+					<td><span class=\"badge bg-success\">".$num_penta_3_5."</span></td>
+					<td>[42] Penta</td>
+					<td><i class=\"fas fa-syringe nav-icon\">&nbsp;&nbsp;3ª dose</i></td>
+				</tr>
+				
+				
+				<tr>
 					<td></td>
 					<td>Data inicial</td>
 					<td>".dtshow($dti_5)."</td>

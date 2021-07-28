@@ -1,1 +1,0 @@
-Pasta para todos os arquivos .HTML gerados

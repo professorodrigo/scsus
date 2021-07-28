@@ -1,1 +1,0 @@
-Pasta para os resumos dos dashboards
