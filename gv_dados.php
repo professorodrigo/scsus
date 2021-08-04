@@ -8,7 +8,7 @@
 
 require_once('session.php');
 require_once('functions.php');
-require_once('config/users.php');
+require_once('config/install.php');
 
 $cbnome = isset($_POST["cbnome"]) ? trim($_POST["cbnome"]) : "Secretaria Municipal de Saúde de Teste";
 $cbend1 = isset($_POST["cbend1"]) ? trim($_POST["cbend1"]) : "Avenida Sete de Setembro, número 29387 - Sala 2";
@@ -32,5 +32,5 @@ $fconfig = fopen($file,'w');
 fwrite($fconfig, $texto);
 fclose($fconfig);
 $ctrli = 1;
-include 'plugins/ctrli/index.php';
+//include 'plugins/ctrli/index.php';
 ?>

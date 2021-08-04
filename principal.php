@@ -5,7 +5,9 @@
 //   Rodrigo Silva
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+ini_set('max_execution_time', 0);
+ini_set("memory_limit", "-1");
+date_default_timezone_set('America/Sao_Paulo');
 header("Cache-Control: no-store, no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
@@ -14,7 +16,7 @@ header("Content-Type: text/html;  charset=utf-8",true);
 require_once('session.php');
 require_once('functions.php');
 include('sobre.php');
-include('config/users.php');
+include('config/install.php');
 
 $ap = '';
 
@@ -271,7 +273,7 @@ if (date('Ymd') > datasomadias($dtinstall,5)){
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-
+<div id="controle" name="controle"></div>
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -335,7 +337,14 @@ if (date('Ymd') > datasomadias($dtinstall,5)){
 <!-- bootstrap color picker -->
 <script src="plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
 
-
+<script>
+	$(document).ready(function() {
+	  $.ajaxSetup({ cache: false });
+	  setInterval(function() {
+		$('#controle').load('session.php');
+	  }, 3000);
+	});
+</script>
 <?php echo $mensagem;?>
 
 </body>

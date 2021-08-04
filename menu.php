@@ -519,6 +519,22 @@ if (file_exists("config/banco_".$_SESSION['key'].".php")){
             </a>
           </li>
           <li class="nav-item">
+            <a href="#" onclick="$('#main-body').load('frm_sigtap.php');return false;" class="nav-link">
+              <i class="nav-icon fas fa-upload"></i>
+              <p>
+                SIGTAP
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" onclick="$('#main-body').load('frm_cbo.php');return false;" class="nav-link">
+              <i class="nav-icon fas fa-upload"></i>
+              <p>
+                CBO
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="#" onclick="$('#main-body').load('pg_doe.php');return false;" class="nav-link">
               <i class="nav-icon fas fa-comment-dollar"></i>
               <p>

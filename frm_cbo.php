@@ -19,11 +19,11 @@ $fphp = $ap.".php";
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Carregar arquivo XML</h1>
+            <h1>Carregar arquivo CBO</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item active">Carregar arquivo XML</li>
+              <li class="breadcrumb-item active">Carregar arquivo CBO</li>
             </ol>
           </div>
         </div>
@@ -41,7 +41,7 @@ $fphp = $ap.".php";
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Upload do arquivo XML</h3>
+                <h3 class="card-title">Upload do arquivo CBO</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -62,12 +62,13 @@ $fphp = $ap.".php";
                 </div>
             </div>
             <!-- /.card -->
-			Para baixar o arquivo XMLPARAESUS21_xxxxxx.ZIP entre com seu usuário e senha em:<br>
-			http://cnesadm.datasus.gov.br/cnesadm/login<br>
-			No menu lateral da esquerda escolha as opções:<br>
-			1 - Gestão CNES<br>
-			2 - Estabelecimentos<br>
-			3 - Arquivos disponíveis<br>
+			Para baixar o arquivo ESTRUTURA CBO.ZIP entre em:<br>
+			http://www.mtecbo.gov.br/cbosite/pages/home.jsf<br>
+			No menu lateral da esquerda escolha a opção:<br>
+			* Downloads<br>
+			Clique na opção:<br>
+			* Estrutura CBO (CSV) - Arquivo ZIP<br>
+			Prove que você não é um robô e clique em "Download"<br>
         </div>
         <!-- /.row -->
 		</form>
@@ -85,7 +86,7 @@ $(function () {
 		fd.append('arquivo', files);
 	
 		$.ajax({
-			url: 'gv_xml.php',
+			url: 'gv_cbo.php',
 			type: 'post',
 			data: fd,
 			contentType: false,
@@ -93,7 +94,7 @@ $(function () {
 			success: function(response){
 				if(response.substring(0,2) == 'Ok'){
 					alert(response);
-					$('#main-body').load('frm_xml.php');
+					$('#main-body').load('frm_cbo.php');
 				}
 				else{
 					alert(response);
