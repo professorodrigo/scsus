@@ -1,17 +1,24 @@
 <?php
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//   15/07/2021
+//   06/08/2021
 //   Rodrigo Silva
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 require_once('session.php');
 $sw_db = "?";
-if (file_exists("config/banco_".$_SESSION['key'].".php")){
-	require_once("config/banco_".$_SESSION['key'].".php");
-	$sw_db = $dbdb;
+$db = new SQLite3('db/scsus.db');
+$result = $db->query("SELECT * FROM banco WHERE id = '".$_SESSION['key']."'");
+while($array = $result->fetchArray(SQLITE3_ASSOC)){
+	$dbhost = $array['dbhost'];
+	$dbport = $array['dbport'];
+	$dbdb = $array['dbdb'];
+	$dbuser = $array['dbuser'];
+	$dbpass = $array['dbpass'];
 }
+$sw_db = $dbdb;
+
 ?>
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -181,19 +188,19 @@ if (file_exists("config/banco_".$_SESSION['key'].".php")){
 				</a>
 				<ul class="nav nav-treeview">
 				  <li class="nav-item">
-					<a href="#" onclick="$('#main-body').load('prep.php?ap=rel_mexames');return false;" class="nav-link">
+					<a href="#" onclick="$('#main-body').load('prep.php?ap=rel_exames');return false;" class="nav-link">
 					  <i class="fas fa-stethoscope nav-icon  text-warning"></i>
 					  <p>Exames <small>[gerar]</small></p>
 					</a>
 				  </li>
 				  <li class="nav-item">
-					<a href="#" onclick="$('#main-body').load('ver.php?ap=rel_mexames');return false;" class="nav-link">
+					<a href="#" onclick="$('#main-body').load('ver.php?ap=rel_exames');return false;" class="nav-link">
 					  <i class="fas fa-fighter-jet nav-icon text-info"></i>
 					  <p>Exames</p>
 					</a>
 				  </li>
 				  <li class="nav-item">
-					<a href="#" onclick="$('#main-body').load('frm_filtro.php?ap=rel_mexames');return false;" class="nav-link">
+					<a href="#" onclick="$('#main-body').load('frm_filtro.php?ap=rel_exames');return false;" class="nav-link">
 					  <i class="fas fa-filter nav-icon"></i>
 					  <p>Filtro</p>
 					</a>
@@ -208,13 +215,13 @@ if (file_exists("config/banco_".$_SESSION['key'].".php")){
 					</a>
 					<ul class="nav nav-treeview">
 					  <li class="nav-item">
-						<a href="#" onclick="$('#main-body').load('verc.php?ap=mexames_T');return false;" class="nav-link">
+						<a href="#" onclick="$('#main-body').load('verc.php?ap=exames_T');return false;" class="nav-link">
 						  <i class="nav-icon fas fa-file-csv"></i>
 						  <p><small>Mulheres</small></p>
 						</a>
 					  </li>
 					  <li class="nav-item">
-						<a href="#" onclick="$('#main-body').load('verc.php?ap=mexames_P');return false;" class="nav-link">
+						<a href="#" onclick="$('#main-body').load('verc.php?ap=exames_P');return false;" class="nav-link">
 						  <i class="nav-icon fas fa-file-csv"></i>
 						  <p><small>Procedimentos</small></p>
 						</a>
@@ -511,28 +518,164 @@ if (file_exists("config/banco_".$_SESSION['key'].".php")){
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" onclick="$('#main-body').load('frm_xml.php');return false;" class="nav-link">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-upload"></i>
               <p>
-                XML CNES
+                Importação
+                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#" onclick="$('#main-body').load('frm_xml.php');return false;" class="nav-link">
+                  <i class="fas fa-upload nav-icon"></i>
+                  <p>CNES (xml)</p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#" onclick="$('#main-body').load('frm_sigtap.php');return false;" class="nav-link">
+                  <i class="fas fa-upload nav-icon"></i>
+                  <p>SIGTAP</p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#" onclick="$('#main-body').load('frm_cbo.php');return false;" class="nav-link">
+                  <i class="fas fa-upload nav-icon"></i>
+                  <p>CBO</p>
+                </a>
+              </li>
+            </ul>
           </li>
           <li class="nav-item">
-            <a href="#" onclick="$('#main-body').load('frm_sigtap.php');return false;" class="nav-link">
-              <i class="nav-icon fas fa-upload"></i>
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-download"></i>
               <p>
-                SIGTAP
+                Exportação
+                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-download nav-icon"></i>
+                  <p>BPA</p>
+                </a>
+              </li>
+            </ul>
           </li>
           <li class="nav-item">
-            <a href="#" onclick="$('#main-body').load('frm_cbo.php');return false;" class="nav-link">
-              <i class="nav-icon fas fa-upload"></i>
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
               <p>
-                CBO
+                Tabelas
+                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#" onclick="$('#main-body').load('tabela2.php?ap=cbos');return false;" class="nav-link">
+                  <i class="fas fa-receipt nav-icon"></i>
+                  <p>CBO</p>
+                </a>
+              </li>
+			  <li class="nav-item">
+				<a href="#" class="nav-link">
+				  <i class="nav-icon fas fa-receipt"></i>
+				  <p>
+					PEC
+					<i class="right fas fa-angle-left"></i>
+				  </p>
+				</a>
+				<ul class="nav nav-treeview">
+				  <li class="nav-item">
+					<a href="#" class="nav-link">
+					  <i class="fas fa-receipt nav-icon"></i>
+					  <p><small>Profissionais</small></p>
+					</a>
+				  </li>
+				  <li class="nav-item">
+					<a href="#" class="nav-link">
+					  <i class="fas fa-receipt nav-icon"></i>
+					  <p><small>Imunobiológicos</small></p>
+					</a>
+				  </li>
+				</ul>
+			  </li> 
+			  <li class="nav-item">
+				<a href="#" class="nav-link">
+				  <i class="nav-icon fas fa-receipt"></i>
+				  <p>
+					CNES
+					<i class="right fas fa-angle-left"></i>
+				  </p>
+				</a>
+				<ul class="nav nav-treeview">
+				  <li class="nav-item">
+					<a href="#" onclick="$('#main-body').load('tabela2.php?ap=profissionais');return false;" class="nav-link">
+					  <i class="fas fa-receipt nav-icon"></i>
+					  <p><small>Profissionais</small></p>
+					</a>
+				  </li>
+				  <li class="nav-item">
+					<a href="#" onclick="$('#main-body').load('tabela2.php?ap=lotacao');return false;" class="nav-link">
+					  <i class="fas fa-receipt nav-icon"></i>
+					  <p><small>Profis. X Lotação</small></p>
+					</a>
+				  </li>
+				  <li class="nav-item">
+					<a href="#" class="nav-link">
+					  <i class="fas fa-receipt nav-icon"></i>
+					  <p><small>Estabelecimentos</small></p>
+					</a>
+				  </li>
+				</ul>
+			  </li> 
+			  <li class="nav-item">
+				<a href="#" class="nav-link">
+				  <i class="nav-icon fas fa-receipt"></i>
+				  <p>
+					SIGTAP
+					<i class="right fas fa-angle-left"></i>
+				  </p>
+				</a>
+				<ul class="nav nav-treeview">
+				  <li class="nav-item">
+					<a href="#" onclick="$('#main-body').load('tabela2.php?ap=procedimentos');return false;" class="nav-link">
+					  <i class="fas fa-receipt nav-icon"></i>
+					  <p>Procedimentos</p>
+					</a>
+				  </li>
+				  <li class="nav-item">
+					<a href="#" onclick="$('#main-body').load('tabela2.php?ap=rl_proc_cid');return false;" class="nav-link">
+					  <i class="fas fa-receipt nav-icon"></i>
+					  <p><small>Proced. X CID</small></p>
+					</a>
+				  </li>
+				  <li class="nav-item">
+					<a href="#" onclick="$('#main-body').load('tabela2.php?ap=rl_proc_ocupacao');return false;" class="nav-link">
+					  <i class="fas fa-receipt nav-icon"></i>
+					  <p><small>Proced. X CBO</small></p>
+					</a>
+				  </li>
+				  <li class="nav-item">
+					<a href="#" onclick="$('#main-body').load('tabela2.php?ap=ocupacoes');return false;" class="nav-link">
+					  <i class="fas fa-receipt nav-icon"></i>
+					  <p><small>Ocupações</small></p>
+					</a>
+				  </li>
+				  <li class="nav-item">
+					<a href="#" onclick="$('#main-body').load('tabela2.php?ap=cids');return false;" class="nav-link">
+					  <i class="fas fa-receipt nav-icon"></i>
+					  <p><small>CIDs</small></p>
+					</a>
+				  </li>
+				</ul>
+			  </li> 
+            </ul>
           </li>
           <li class="nav-item">
             <a href="#" onclick="$('#main-body').load('pg_doe.php');return false;" class="nav-link">

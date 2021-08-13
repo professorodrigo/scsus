@@ -1,15 +1,31 @@
 <?php
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//   15/07/2021
+//   06/08/2021
 //   Rodrigo Silva
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 require_once('session.php');
 require_once('functions.php');
-if (file_exists("config/c_rel_h_".$_SESSION['key'].".php")){
-	require_once("config/c_rel_h_".$_SESSION['key'].".php");
+
+$db = new SQLite3('db/scsus.db');
+$rows = $db->query("SELECT COUNT(*) as count FROM hipertensos WHERE id = '".$_SESSION['key']."'");
+$row = $rows->fetchArray();
+if ($row['count'] > 0){
+	$result = $db->query("SELECT * FROM hipertensos WHERE id = '".$_SESSION['key']."'");
+	while($array = $result->fetchArray(SQLITE3_ASSOC)){
+		$dti = $array['dti'];
+		$dtf = $array['dtf'];
+		$gpa = $array['gpa'];
+		$cfa = $array['cfa'];
+		$paginacao = $array['paginacao'];
+		$grupo = $array['grupo'];
+		$ordem = $array['ordem'];
+		$mcabecalho = $array['mcabecalho'];
+		$m12 = $array['m12'];
+		$des = $array['des'];
+	}
 } else {
 	$dti = date('Ymd');
 	$dtf = datasomadias(date('Ymd'),30);
@@ -37,6 +53,7 @@ if (file_exists("config/c_rel_h_".$_SESSION['key'].".php")){
 	$m12 = 0;
 	$des = 0;
 }
+
 ?>
 
   <!-- Content Wrapper. Contains page content -->

@@ -1,7 +1,7 @@
 <?php
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//   15/07/2021
+//   06/08/2021
 //   Rodrigo Silva
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -16,51 +16,11 @@ header("Content-Type: text/html;  charset=utf-8",true);
 require_once('session.php');
 require_once('functions.php');
 include('sobre.php');
-include('config/install.php');
-
+include('cfg/install.php');
 $ap = '';
-
-$filedd = "config/dados_".$_SESSION['key'].".php";
-if (!file_exists($filedd)){
-	$cbnome = "Secretaria Municipal de Saúde de Teste";
-	$cbend1 = "Avenida Sete de Setembro, número 29387 - Sala 2";
-	$cbend2 = "Bairro Matarazzo Caprinio";
-	$cbend3 = "CEP 98732-980";
-	$cbend4 = "São Matheus do Oeste Mineiro - MG";
-	$cbcont1 = "+55 (47) 23432-9384 | +55 (47) 12384-3234";
-	$cbcont2 = "contatosaude@saomatheus.gov.br | www.saomatheuspref.gov.br";
-	$textodd = "<?php
-	\$cbnome = \"".$cbnome."\";
-	\$cbend1 = \"".$cbend1."\";
-	\$cbend2 = \"".$cbend2."\";
-	\$cbend3 = \"".$cbend3."\";
-	\$cbend4 = \"".$cbend4."\";
-	\$cbcont1 = \"".$cbcont1."\";
-	\$cbcont2 = \"".$cbcont2."\";
-	?>\r\n";
-	$fconfig = fopen($filedd,'w');
-	fwrite($fconfig, $textodd);
-	fclose($fconfig);
-}
 $mensagem = '';
-if (!file_exists("config/banco_".$_SESSION['key'].".php")){
-	require_once('gv_db.php');
-	$mensagem = "
-	  <script type=\"text/javascript\">
-		$(document).ready(function() {
-		  var unique_id = $.gritter.add({
-			title: 'ATENÇÃO',
-			text: 'Antes de qualquer coisa configure o DB',
-			image: 'dist/img/user01.png',
-			sticky: true,
-			//time: 8000,
-			class_name: 'my-sticky-class'
-		  });
-		  return false;
-		});
-	  </script>
-	";
-}
+include('idb2.php');
+
 if (date('d') == 10){
 	$mensagem = "
 	  <script type=\"text/javascript\">
@@ -94,27 +54,6 @@ if (date('d') == 28){
 		});
 	  </script>
 	";	
-}
-
-$file = "config/c_rel_d_".$_SESSION['key'].".php";
-if (!file_exists($file)){
-	require_once('gv_diabeticos.php');
-}
-$file = "config/c_rel_v_".$_SESSION['key'].".php";
-if (!file_exists($file)){
-	require_once('gv_vacinas.php');
-}
-$file = "config/c_rel_g_".$_SESSION['key'].".php";
-if (!file_exists($file)){
-	require_once('gv_gestantes.php');
-}
-$file = "config/c_rel_h_".$_SESSION['key'].".php";
-if (!file_exists($file)){
-	require_once('gv_hipertensos.php');
-}
-$file = "config/c_rel_m_".$_SESSION['key'].".php";
-if (!file_exists($file)){
-	require_once('gv_mulheres.php');
 }
 
 $fdash = 'dash_ind.php';
@@ -225,7 +164,7 @@ if (date('Ymd') > datasomadias($dtinstall,5)){
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index.php" class="brand-link">
+    <a href="#" class="brand-link">
       <img src="dist/img/scsuslogo.png" alt="sc-SUS Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light"><?php echo $sobre['nome'];?></span>
     </a>

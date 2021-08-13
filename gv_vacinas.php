@@ -1,13 +1,15 @@
 <?php
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//   15/07/2021
+//   06/08/2021
 //   Rodrigo Silva
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 require_once('session.php');
 require_once('functions.php');
+
+$db = new SQLite3('db/scsus.db');
 
 $dtif = isset($_POST["dtif"]) ? $_POST["dtif"] : 0;
 if ($dtif == 0){
@@ -46,26 +48,31 @@ $imbios = isset($_POST["imbios"]) ? trim($_POST["imbios"]) : '33';
 $mcabecalho = isset($_POST["mcabecalho"]) ? trim($_POST["mcabecalho"]) : 1;
 $cfa = isset($_POST["cfa"]) ? trim($_POST["cfa"]) : 0;
 $tpb = isset($_POST["tpb"]) ? trim($_POST["tpb"]) : 12;
-$texto = "<?php
-\$dti = ".$dti.";
-\$dtf = ".$dtf.";
-\$gpa = ".$gpa.";
-\$apvac = ".$apvac.";
-\$paginacao = ".$paginacao.";
-\$idin = ".$idin.";
-\$idfi = ".$idfi.";
-\$imbios = '".$imbios."';
-\$cd3 = '".$cd3."';
-\$ordem = '".$ordem."';
-\$grupo = '".$grupo."';
-\$mcabecalho = ".$mcabecalho.";
-\$cfa = ".$cfa.";
-\$des = ".$des.";
-\$tpb = ".$tpb.";
-?>\r\n";
-$file = "config/c_rel_v_".$_SESSION['key'].".php";
-if (file_exists($file)){unlink($file);}
-$fconfig = fopen($file,'w');
-fwrite($fconfig, $texto);
-fclose($fconfig);
+$d3c = isset($_POST["d3c"]) ? trim($_POST["d3c"]) : 0;
+
+
+$update = "
+	UPDATE vacinas
+	   SET dti = '".$dti."',
+		   dtf = '".$dtf."',
+		   gpa = '".$gpa."',
+		   idin = '".$idin."',
+		   idfi = '".$idfi."',
+		   tpb = '".$tpb."',
+		   apvac = '".$apvac."',
+		   imbios = '".$imbios."',
+		   cd3 = '".$cd3."',
+		   d3c = '".$d3c."',
+		   ridade = '".$ridade."',
+		   dt3anos = '".$dt3anos."',
+		   cfa = '".$cfa."',
+		   des = '".$des."',
+		   paginacao = '".$paginacao."',
+		   mcabecalho = '".$mcabecalho."',
+		   grupo = '".$grupo."',
+		   ordem = '".$ordem."'
+	 WHERE id = '".$_SESSION['key']."';
+";
+$run_estrutura = $db->query($update);
+
 ?>

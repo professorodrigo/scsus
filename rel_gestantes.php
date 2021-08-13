@@ -1,11 +1,13 @@
 <?php
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//   15/07/2021
+//   06/08/2021
 //   Rodrigo Silva
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+ini_set('max_execution_time', 0);
+ini_set("memory_limit", "-1");
+header("Content-type: text/html; charset=utf-8");
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //   Includes
@@ -13,71 +15,50 @@
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 require_once('session.php');
-
-$mensagem = "";
-if (file_exists("config/banco_".$_SESSION['key'].".php")){
-	require_once("config/banco_".$_SESSION['key'].".php");
-} else {
-	$mensagem = "
-	  <script type=\"text/javascript\">
-		$(document).ready(function() {
-		  var unique_id = $.gritter.add({
-			title: 'ATENÇÃO',
-			text: 'Antes de qualquer coisa configure o DB',
-			image: 'dist/img/user01.png',
-			sticky: false,
-			time: 8000,
-			class_name: 'my-sticky-class'
-		  });
-		  return false;
-		});
-	  </script>
-	";	
-}
-if (file_exists("config/c_rel_g_".$_SESSION['key'].".php")){
-	require_once("config/c_rel_g_".$_SESSION['key'].".php");
-} else {
-	$mensagem = "
-	  <script type=\"text/javascript\">
-		$(document).ready(function() {
-		  var unique_id = $.gritter.add({
-			title: 'ATENÇÃO',
-			text: 'Antes de qualquer coisa configure o relatório',
-			image: 'dist/img/user01.png',
-			sticky: false,
-			time: 8000,
-			class_name: 'my-sticky-class'
-		  });
-		  return false;
-		});
-	  </script>
-	";
-}
-echo $mensagem;
-if (file_exists("config/dados_".$_SESSION['key'].".php")){
-	require_once("config/dados_".$_SESSION['key'].".php");
-} else {
-	$mensagem = "
-	  <script type=\"text/javascript\">
-		$(document).ready(function() {
-		  var unique_id = $.gritter.add({
-			title: 'ATENÇÃO',
-			text: 'Antes de qualquer coisa configure os dados do relatório',
-			image: 'dist/img/user01.png',
-			sticky: false,
-			time: 8000,
-			class_name: 'my-sticky-class'
-		  });
-		  return false;
-		});
-	  </script>
-	";
-}
-echo $mensagem;
-
-require_once('connect.php');
 require_once('functions.php');
 require_once('sobre.php');
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//   Configuracoes do banco SQLite
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+$db = new SQLite3('db/scsus.db');
+$result = $db->query("SELECT * FROM banco WHERE id = '".$_SESSION['key']."'");
+while($array = $result->fetchArray(SQLITE3_ASSOC)){
+	$dbhost = $array['dbhost'];
+	$dbport = $array['dbport'];
+	$dbdb = $array['dbdb'];
+	$dbuser = $array['dbuser'];
+	$dbpass = $array['dbpass'];
+}
+$result = $db->query("SELECT * FROM dados WHERE id = '".$_SESSION['key']."'");
+while($array = $result->fetchArray(SQLITE3_ASSOC)){
+	$cbnome = $array['cbnome'];
+	$cbend1 = $array['cbend1'];
+	$cbend2 = $array['cbend2'];
+	$cbend3 = $array['cbend3'];
+	$cbend4 = $array['cbend4'];
+	$cbcont1 = $array['cbcont1'];
+	$cbcont2 = $array['cbcont2'];
+}
+$result = $db->query("SELECT * FROM gestantes WHERE id = '".$_SESSION['key']."'");
+while($array = $result->fetchArray(SQLITE3_ASSOC)){
+	$dti = $array['dti'];
+	$dtf = $array['dtf'];
+	$dpp = $array['dpp'];
+	$dum = $array['dum'];
+	$mconsultas = $array['mconsultas'];
+	$tbodonto = $array['tbodonto'];
+	$gpa = $array['gpa'];
+	$paginacao = $array['paginacao'];
+	$grupo = $array['grupo'];
+	$ordem = $array['ordem'];
+	$mcabecalho = $array['mcabecalho'];
+	$des = $array['des'];
+}
+require_once('connect.php');
 
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

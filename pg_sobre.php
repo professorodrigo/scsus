@@ -1,13 +1,14 @@
 <?php
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//   15/07/2021
+//   06/08/2021
 //   Rodrigo Silva
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 require_once('session.php');
 require_once('sobre.php');
+include('cfg/install.php');
 ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -43,7 +44,7 @@ require_once('sobre.php');
               <div class="row">
                 <div class="col-12">
                   <h4>
-                    <i class="fas fa-globe"></i> <?php echo $sobre['nome'];?>
+                    <i class="fas fa-exclamation-circle"></i> <?php echo $sobre['nome'];?>
                     <small class="float-right">Data da última alteração: <?php echo $sobre['alteracao'];?></small>
                   </h4>
                 </div>
@@ -75,6 +76,7 @@ require_once('sobre.php');
                 <div class="col-sm-4 invoice-col">
                   <b>Versão: <?php echo $sobre['versao'];?></b><br>
                   <br>
+				  <b>IDi:</b> <?php echo $codinstall;?><br>
                   <b>Versão do PEC:</b> <?php echo $sobre['pec'];?><br>
                   <b>Licença:</b> <?php echo $sobre['licenca'];?><br>
 				  <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank"><img src="dist/img/apache.png" width="192" height="94" border="0"></a> 
@@ -139,35 +141,35 @@ require_once('sobre.php');
                     <table class="table">
                       <tr>
                         <th style="width:50%">Como instalar o XAMMP?</th>
-                        <td><a href="https://www.youtube.com/watch?v=D1KqWqM2B1Q" target="_blank"><img src="dist/img/youtube-iconm.png" alt="Youtube"></a></td>
+                        <td><a href="https://www.youtube.com/watch?v=x8FuCe9Przo" target="_blank"><img src="dist/img/youtube-iconm.png" alt="Youtube"></a></td>
                       </tr>
                       <tr>
                         <th style="width:50%">Como instalar o sc-SUS?</th>
-                        <td><a href="https://www.youtube.com/watch?v=D1KqWqM2B1Q" target="_blank"><img src="dist/img/youtube-iconm.png" alt="Youtube"></a></td>
+                        <td><a href="https://www.youtube.com/watch?v=l0ovAxf5itg" target="_blank"><img src="dist/img/youtube-iconm.png" alt="Youtube"></a></td>
                       </tr>
                       <tr>
-                        <th style="width:50%">Como criar usu&aacute;rios?</th>
-                        <td><a href="https://www.youtube.com/watch?v=u3WqwDfmCxo&t=268s" target="_blank"><img src="dist/img/youtube-iconm.png" alt="Youtube"></a></td>
+                        <th style="width:50%">Instalando o sc-SUS separado o PEC (1)</th>
+                        <td><a href="https://www.youtube.com/watch?v=RHbe2Q5XlhQ" target="_blank"><img src="dist/img/youtube-iconm.png" alt="Youtube"></a></td>
                       </tr>
                       <tr>
-                        <th style="width:50%">Como trocar a senha do &quot;admin&quot;?</th>
-                        <td><a href="https://www.youtube.com/watch?v=u3WqwDfmCxo" target="_blank"><img src="dist/img/youtube-iconm.png" alt="Youtube"></a></td>
+                        <th style="width:50%">Instalando o sc-SUS separado o PEC (2)</th>
+                        <td><a href="https://www.youtube.com/watch?v=49KjZ_MXrWk" target="_blank"><img src="dist/img/youtube-iconm.png" alt="Youtube"></a></td>
                       </tr>
                       <tr>
                         <th style="width:50%">Configurando o PHP.ini</th>
-                        <td><a href="https://www.youtube.com/watch?v=D1KqWqM2B1Q&t=416s" target="_blank"><img src="dist/img/youtube-iconm.png" alt="Youtube"></a></td>
+                        <td><a href="https://www.youtube.com/watch?v=x8FuCe9Przo&t=936s" target="_blank"><img src="dist/img/youtube-iconm.png" alt="Youtube"></a></td>
                       </tr>
                       <tr>
                         <th style="width:50%">Trocando a porta do Apache</th>
                         <td><a href="https://www.youtube.com/watch?v=-SXSB9vevf0" target="_blank"><img src="dist/img/youtube-iconm.png" alt="Youtube"></a></td>
                       </tr>
                       <tr>
-                        <th style="width:50%">PEC e sc-SUS em computadores separados</th>
-                        <td><a href="https://www.youtube.com/watch?v=49KjZ_MXrWk" target="_blank"><img src="dist/img/youtube-iconm.png" alt="Youtube"></a></td>
+                        <th style="width:50%">Instalação do SQLite</th>
+                        <td><a href="https://www.youtube.com/watch?v=GHaI9wuvfT0" target="_blank"><img src="dist/img/youtube-iconm.png" alt="Youtube"></a></td>
                       </tr>
                       <tr>
                         <th style="width:50%">Como atualizar o sc-SUS?</th>
-                        <td><a href="https://www.youtube.com/watch?v=D1KqWqM2B1Q&t=1078s" target="_blank"><img src="dist/img/youtube-iconm.png" alt="Youtube"></a></td>
+                        <td><a href="#" target="_blank"><img src="dist/img/youtube-iconm.png" alt="Youtube"></a></td>
                       </tr>
                     </table>
                   </div>

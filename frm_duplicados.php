@@ -1,22 +1,36 @@
 <?php
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//   15/07/2021
+//   06/08/2021
 //   Rodrigo Silva
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 require_once('session.php');
 require_once('functions.php');
-if (file_exists("config/c_rel_du_".$_SESSION['key'].".php")){
-	require_once("config/c_rel_du_".$_SESSION['key'].".php");
+
+$db = new SQLite3('db/scsus.db');
+$rows = $db->query("SELECT COUNT(*) as count FROM duplicados WHERE id = '".$_SESSION['key']."'");
+$row = $rows->fetchArray();
+if ($row['count'] > 0){
+	$result = $db->query("SELECT * FROM duplicados WHERE id = '".$_SESSION['key']."'");
+	while($array = $result->fetchArray(SQLITE3_ASSOC)){
+		$gpa = $array['gpa'];
+		$cfa = $array['cfa'];
+		$paginacao = $array['paginacao'];
+		$grupo = $array['grupo'];
+		$ordem = $array['ordem'];
+		$mcabecalho = $array['mcabecalho'];
+	}
 } else {
 	$gpa = 0;
 	$cfa = 0;
 	$paginacao = 0;
+	$grupo = 'ine';
 	$ordem = 'N';
 	$mcabecalho = 1;
 }
+
 ?>
 
   <!-- Content Wrapper. Contains page content -->

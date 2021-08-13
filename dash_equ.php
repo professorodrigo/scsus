@@ -1,14 +1,25 @@
 <?php
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//   15/07/2021
+//   06/08/2021
 //   Rodrigo Silva
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 require_once('session.php');
 require_once('functions.php');
-require_once("config/dados_".$_SESSION['key'].".php");
+
+$db = new SQLite3('db/scsus.db');
+$result = $db->query("SELECT * FROM dados WHERE id = '".$_SESSION['key']."'");
+while($array = $result->fetchArray(SQLITE3_ASSOC)){
+	$cbnome = $array['cbnome'];
+	$cbend1 = $array['cbend1'];
+	$cbend2 = $array['cbend2'];
+	$cbend3 = $array['cbend3'];
+	$cbend4 = $array['cbend4'];
+	$cbcont1 = $array['cbcont1'];
+	$cbcont2 = $array['cbcont2'];
+}
 
 $tab_ind1 = "";
 if (file_exists("resumo/r_ind1_".$_SESSION['key'].".php")){

@@ -1,15 +1,37 @@
 <?php
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//   15/07/2021
+//   06/08/2021
 //   Rodrigo Silva
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 require_once('session.php');
 require_once('functions.php');
-if (file_exists("config/c_rel_v_".$_SESSION['key'].".php")){
-	require_once("config/c_rel_v_".$_SESSION['key'].".php");
+
+$db = new SQLite3('db/scsus.db');
+$rows = $db->query("SELECT COUNT(*) as count FROM vacinas WHERE id = '".$_SESSION['key']."'");
+$row = $rows->fetchArray();
+if ($row['count'] > 0){
+	$result = $db->query("SELECT * FROM vacinas WHERE id = '".$_SESSION['key']."'");
+	while($array = $result->fetchArray(SQLITE3_ASSOC)){
+		$dti = $array['dti'];
+		$dtf = $array['dtf'];
+		$gpa = $array['gpa'];
+		$cfa = $array['cfa'];
+		$paginacao = $array['paginacao'];
+		$grupo = $array['grupo'];
+		$ordem = $array['ordem'];
+		$mcabecalho = $array['mcabecalho'];
+		$idin = $array['idin'];
+		$idfi = $array['idfi'];
+		$imbios = $array['imbios'];
+		$apvac = $array['apvac'];
+		$cd3 = $array['cd3'];
+		$des = $array['des'];
+		$tpb = $array['tpb'];
+		$d3c = $array['d3c'];
+	}
 } else {
 	$dti = date('Ymd');
 	$dtf = datasomadias(date('Ymd'),30);
@@ -41,7 +63,9 @@ if (file_exists("config/c_rel_v_".$_SESSION['key'].".php")){
 	$cd3 = 'OU';
 	$des = 0;
 	$tpb = 12;
+	$d3c = 0;
 }
+
 
 ?>
 
@@ -126,7 +150,24 @@ if (file_exists("config/c_rel_v_".$_SESSION['key'].".php")){
 						?>
                     </select>
                   </div>
-				  
+                  <div class="form-group">
+                    <label>Considerar apenas 3 doses completas</label>
+                      <select class="form-control" name="d3c" id="d3c">
+						<?php
+						if ($d3c == 0){
+							echo "
+							  <option value=\"0\" selected>Sim</option>
+							  <option value=\"1\">Não</option>
+							";
+						} else {
+							echo "
+							  <option value=\"0\">Sim</option>
+							  <option value=\"1\" selected>Não</option>
+							";
+						}
+						?>
+                    </select>
+                  </div>
                   <div class="form-group">
                     <label>Dose 3 - OU / E</label>
                       <select class="form-control" name="cd3" id="cd3">

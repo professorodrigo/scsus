@@ -1,13 +1,15 @@
 <?php
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//   15/07/2021
+//   06/08/2021
 //   Rodrigo Silva
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 require_once('session.php');
 require_once('functions.php');
+
+$db = new SQLite3('db/scsus.db');
 
 $dtif = isset($_POST["dtif"]) ? $_POST["dtif"] : 0;
 if ($dtif == 0){
@@ -41,21 +43,23 @@ $ordem = isset($_POST["ordem"]) ? trim($_POST["ordem"]) : 'N';
 $grupo = isset($_POST["grupo"]) ? trim($_POST["grupo"]) : 'ine';
 $mcabecalho = isset($_POST["mcabecalho"]) ? trim($_POST["mcabecalho"]) : 1;
 $cfa = isset($_POST["cfa"]) ? trim($_POST["cfa"]) : 0;
-$texto = "<?php
-\$dti = ".$dti.";
-\$dtf = ".$dtf.";
-\$gpa = ".$gpa.";
-\$m12 = ".$m12.";
-\$paginacao = ".$paginacao.";
-\$ordem = '".$ordem."';
-\$grupo = '".$grupo."';
-\$mcabecalho = ".$mcabecalho.";
-\$cfa = ".$cfa.";
-\$des = ".$des.";
-?>\r\n";
-$file = "config/c_rel_h_".$_SESSION['key'].".php";
-if (file_exists($file)){unlink($file);}
-$fconfig = fopen($file,'w');
-fwrite($fconfig, $texto);
-fclose($fconfig);
+
+
+$update = "
+	UPDATE hipertensos
+	   SET dti = '".$dti."',
+		   dtf = '".$dtf."',
+		   gpa = '".$gpa."',
+		   m12 = '".$m12."',
+		   cfa = '".$cfa."',
+		   des = '".$des."',
+		   paginacao = '".$paginacao."',
+		   mcabecalho = '".$mcabecalho."',
+		   grupo = '".$grupo."',
+		   ordem = '".$ordem."'
+	 WHERE id = '".$_SESSION['key']."';
+";
+$run_estrutura = $db->query($update);
+
+
 ?>

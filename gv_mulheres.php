@@ -1,13 +1,15 @@
 <?php
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//   15/07/2021
+//   06/08/2021
 //   Rodrigo Silva
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 require_once('session.php');
 require_once('functions.php');
+
+$db = new SQLite3('db/scsus.db');
 
 $dtif = isset($_POST["dtif"]) ? $_POST["dtif"] : 0;
 if ($dtif == 0){
@@ -47,27 +49,32 @@ $idin = isset($_POST["idin"]) ? trim($_POST["idin"]) : 0;
 $idfi = isset($_POST["idfi"]) ? trim($_POST["idfi"]) : 150;
 $proceds = isset($_POST["proceds"]) ? trim($_POST["proceds"]) : '';
 $dt3anos = isset($_POST["dt3anos"]) ? trim($_POST["dt3anos"]) : 'U';
-$texto = "<?php
-\$dti = ".$dti.";
-\$dtf = ".$dtf.";
-\$gpa = ".$gpa.";
-\$tbusca = ".$tbusca.";
-\$apvac = ".$apvac.";
-\$idin = ".$idin.";
-\$idfi = ".$idfi.";
-\$proceds = '".$proceds."';
-\$paginacao = ".$paginacao.";
-\$ordem = '".$ordem."';
-\$grupo = '".$grupo."';
-\$mcabecalho = ".$mcabecalho.";
-\$ridade = ".$ridade.";
-\$cfa = ".$cfa.";
-\$dt3anos = '".$dt3anos."';
-\$des = ".$des.";
-?>\r\n";
-$file = "config/c_rel_m_".$_SESSION['key'].".php";
-if (file_exists($file)){unlink($file);}
-$fconfig = fopen($file,'w');
-fwrite($fconfig, $texto);
-fclose($fconfig);
+$moh = isset($_POST["moh"]) ? trim($_POST["moh"]) : 'A';
+
+
+
+$update = "
+	UPDATE mulheres
+	   SET dti = '".$dti."',
+		   dtf = '".$dtf."',
+		   gpa = '".$gpa."',
+		   idin = '".$idin."',
+		   idfi = '".$idfi."',
+		   tbusca = '".$tbusca."',
+		   apvac = '".$apvac."',
+		   proceds = '".$proceds."',
+		   ridade = '".$ridade."',
+		   dt3anos = '".$dt3anos."',
+		   cfa = '".$cfa."',
+		   des = '".$des."',
+		   paginacao = '".$paginacao."',
+		   mcabecalho = '".$mcabecalho."',
+		   grupo = '".$grupo."',
+		   ordem = '".$ordem."',
+		   moh = '".$moh."'
+	 WHERE id = '".$_SESSION['key']."';
+";
+$run_estrutura = $db->query($update);
+
+
 ?>

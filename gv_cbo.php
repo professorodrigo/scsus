@@ -1,7 +1,7 @@
 <?php
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//   15/07/2021
+//   06/08/2021
 //   Rodrigo Silva
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -42,6 +42,7 @@ if (array_search($extensao, $_UP['extensoes']) === false) {
 			if (file_exists('cbo/cbo.zip')){
 				unlink('cbo/cbo.zip');
 			}
+			rename("cbo/CBO2002 - Ocupacao.csv","cbo/cbo.csv");
 			$msg_final = "Ok! Arquivo enviado";
 		} else {
 			$msg_final .= "Er: Não foi possível descompactar o arquivo\n";

@@ -1,11 +1,13 @@
 <?php
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//   15/07/2021
+//   06/08/2021
 //   Rodrigo Silva
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+ini_set('max_execution_time', 0);
+ini_set("memory_limit", "-1");
+header("Content-type: text/html; charset=utf-8");
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //   Includes
@@ -13,71 +15,55 @@
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 require_once('session.php');
-
-$mensagem = "";
-if (file_exists("config/banco_".$_SESSION['key'].".php")){
-	require_once("config/banco_".$_SESSION['key'].".php");
-} else {
-	$mensagem = "
-	  <script type=\"text/javascript\">
-		$(document).ready(function() {
-		  var unique_id = $.gritter.add({
-			title: 'ATENÇÃO',
-			text: 'Antes de qualquer coisa configure o DB',
-			image: 'dist/img/user01.png',
-			sticky: false,
-			time: 8000,
-			class_name: 'my-sticky-class'
-		  });
-		  return false;
-		});
-	  </script>
-	";	
-}
-if (file_exists("config/c_rel_m_".$_SESSION['key'].".php")){
-	require_once("config/c_rel_m_".$_SESSION['key'].".php");
-} else {
-	$mensagem = "
-	  <script type=\"text/javascript\">
-		$(document).ready(function() {
-		  var unique_id = $.gritter.add({
-			title: 'ATENÇÃO',
-			text: 'Antes de qualquer coisa configure o relatório',
-			image: 'dist/img/user01.png',
-			sticky: false,
-			time: 8000,
-			class_name: 'my-sticky-class'
-		  });
-		  return false;
-		});
-	  </script>
-	";
-}
-echo $mensagem;
-if (file_exists("config/dados_".$_SESSION['key'].".php")){
-	require_once("config/dados_".$_SESSION['key'].".php");
-} else {
-	$mensagem = "
-	  <script type=\"text/javascript\">
-		$(document).ready(function() {
-		  var unique_id = $.gritter.add({
-			title: 'ATENÇÃO',
-			text: 'Antes de qualquer coisa configure os dados do relatório',
-			image: 'dist/img/user01.png',
-			sticky: false,
-			time: 8000,
-			class_name: 'my-sticky-class'
-		  });
-		  return false;
-		});
-	  </script>
-	";
-}
-echo $mensagem;
-
-require_once('connect.php');
 require_once('functions.php');
 require_once('sobre.php');
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//   Configuracoes do banco SQLite
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+$db = new SQLite3('db/scsus.db');
+$result = $db->query("SELECT * FROM banco WHERE id = '".$_SESSION['key']."'");
+while($array = $result->fetchArray(SQLITE3_ASSOC)){
+	$dbhost = $array['dbhost'];
+	$dbport = $array['dbport'];
+	$dbdb = $array['dbdb'];
+	$dbuser = $array['dbuser'];
+	$dbpass = $array['dbpass'];
+}
+$result = $db->query("SELECT * FROM dados WHERE id = '".$_SESSION['key']."'");
+while($array = $result->fetchArray(SQLITE3_ASSOC)){
+	$cbnome = $array['cbnome'];
+	$cbend1 = $array['cbend1'];
+	$cbend2 = $array['cbend2'];
+	$cbend3 = $array['cbend3'];
+	$cbend4 = $array['cbend4'];
+	$cbcont1 = $array['cbcont1'];
+	$cbcont2 = $array['cbcont2'];
+}
+$result = $db->query("SELECT * FROM mulheres WHERE id = '".$_SESSION['key']."'");
+while($array = $result->fetchArray(SQLITE3_ASSOC)){
+	$dti = $array['dti'];
+	$dtf = $array['dtf'];
+	$gpa = $array['gpa'];
+	$cfa = $array['cfa'];
+	$paginacao = $array['paginacao'];
+	$grupo = $array['grupo'];
+	$ordem = $array['ordem'];
+	$mcabecalho = $array['mcabecalho'];
+	$dt3anos = $array['dt3anos'];
+	$ridade = $array['ridade'];
+	$proceds = $array['proceds'];
+	$idin = $array['idin'];
+	$idfi = $array['idfi'];
+	$apvac = $array['apvac'];
+	$tbusca = $array['tbusca'];
+	$des = $array['des'];
+	$moh = $array['moh'];
+}
+require_once('connect.php');
 
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -86,17 +72,17 @@ require_once('sobre.php');
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 // -----------------------------------------------------------------------
-$file = "html/rel_mexames_".$_SESSION['key'].".html";
+$file = "html/rel_exames_".$_SESSION['key'].".html";
 if (file_exists($file)){unlink($file);}
 $HTML = fopen($file,'w');
 // -----------------------------------------------------------------------
-$file = "csv/mexames_T_".$_SESSION['key'].".csv";
+$file = "csv/exames_T_".$_SESSION['key'].".csv";
 if (file_exists($file)){unlink($file);}
 $FT = fopen($file,'w');
 $texto = "Seq;CPF;CNS;Nome;DtNascimento;Mae;Idade;MarcGestante;MarcHipertensa;MarcDiabetica;CNES;INE;MA\r\n";
 fwrite($FT, $texto);
 // -----------------------------------------------------------------------
-$file = "csv/mexames_P_".$_SESSION['key'].".csv";
+$file = "csv/exames_P_".$_SESSION['key'].".csv";
 if (file_exists($file)){unlink($file);}
 $FP = fopen($file,'w');
 $texto = "Seq;CPF;CNS;DtProced;Tabela;CNSProf;NomeProf;CNES;INE;CBO;Procedimento(A/S)\r\n";
@@ -161,6 +147,18 @@ $conta_gravacao = 0;
 // -----------------------------------------------------------------------
 $duplicados = array();
 $conta_duplicados = 0;
+
+$condsexo1 = "";
+$condsexo2 = "";
+if ($moh == 'M'){
+	$condsexo1 = "no_sexo = 'FEMININO' AND";
+	$condsexo2 = "WHERE ds_sexo = 'FEMININO'";
+}
+if ($moh == 'H'){
+	$condsexo1 = "no_sexo = 'MASCULINO' AND";
+	$condsexo2 = "WHERE ds_sexo = 'MASCULINO'";
+}
+
 
 // ===========================================================================================================
 $rel_pagina_inicio = "
@@ -355,7 +353,7 @@ FROM
 		FROM 
 			tb_cidadao 
 		WHERE 
-			no_sexo = 'FEMININO' AND
+			".$condsexo1."
 			(dt_nascimento >= '".$dti_nas."' AND dt_nascimento <= '".$dtf_nas."')
 		ORDER BY no_cidadao, no_mae, dt_nascimento, dt_atualizado DESC
 	) AS t4
@@ -537,8 +535,7 @@ FROM
 						tb_dim_sexo
 					ON tb_dim_sexo.co_seq_dim_sexo = t1.co_dim_sexo
 				) AS t2
-				WHERE
-					ds_sexo = 'FEMININO'
+				".$condsexo2."
 			) AS t4
 			LEFT JOIN
 				tb_dim_equipe

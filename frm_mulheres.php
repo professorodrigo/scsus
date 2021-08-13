@@ -1,15 +1,38 @@
 <?php
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//   15/07/2021
+//   06/08/2021
 //   Rodrigo Silva
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 require_once('session.php');
 require_once('functions.php');
-if (file_exists("config/c_rel_m_".$_SESSION['key'].".php")){
-	require_once("config/c_rel_m_".$_SESSION['key'].".php");
+
+$db = new SQLite3('db/scsus.db');
+$rows = $db->query("SELECT COUNT(*) as count FROM mulheres WHERE id = '".$_SESSION['key']."'");
+$row = $rows->fetchArray();
+if ($row['count'] > 0){
+	$result = $db->query("SELECT * FROM mulheres WHERE id = '".$_SESSION['key']."'");
+	while($array = $result->fetchArray(SQLITE3_ASSOC)){
+		$dti = $array['dti'];
+		$dtf = $array['dtf'];
+		$gpa = $array['gpa'];
+		$cfa = $array['cfa'];
+		$paginacao = $array['paginacao'];
+		$grupo = $array['grupo'];
+		$ordem = $array['ordem'];
+		$mcabecalho = $array['mcabecalho'];
+		$dt3anos = $array['dt3anos'];
+		$ridade = $array['ridade'];
+		$proceds = $array['proceds'];
+		$idin = $array['idin'];
+		$idfi = $array['idfi'];
+		$apvac = $array['apvac'];
+		$tbusca = $array['tbusca'];
+		$des = $array['des'];
+		$moh = $array['moh'];
+	}
 } else {
 	$dti = date('Ymd');
 	$dtf = datasomadias(date('Ymd'),30);
@@ -42,6 +65,7 @@ if (file_exists("config/c_rel_m_".$_SESSION['key'].".php")){
 	$apvac = 0;
 	$tbusca = 12;
 	$des = 0;
+	$moh = 'A';
 }
 
 $lridade = array();
@@ -259,6 +283,42 @@ $lridade[49][0] = 64; $lridade[49][1] = "64";
                   <div class="form-group">
                     <label for="proceds">Procedimentos</label>
                     <input type="text" name="proceds" class="form-control" id="proceds" value="<?php echo $proceds;?>">
+                  </div>
+                  <div class="form-group">
+                    <label>Sexo</label>
+                      <select class="form-control" name="moh" id="moh">
+						<?php
+						if ($moh == 'A'){
+							echo "
+							  <option value=\"A\" selected>Mulheres e homens</option>
+							  <option value=\"M\">Apenas mulheres</option>
+							  <option value=\"H\">Apenas homens</option>
+							";
+						} else {
+							if ($moh == 'M'){
+								echo "
+								  <option value=\"A\">Mulheres e homens</option>
+								  <option value=\"M\" selected>Apenas mulheres</option>
+								  <option value=\"H\">Apenas homens</option>
+								";
+							} else {
+								if ($moh == 'H'){
+									echo "
+									  <option value=\"A\">Mulheres e homens</option>
+									  <option value=\"M\">Apenas mulheres</option>
+									  <option value=\"H\" selected>Apenas homens</option>
+									";
+								} else {
+									echo "
+									  <option value=\"A\" selected>Mulheres e homens</option>
+									  <option value=\"M\">Apenas mulheres</option>
+									  <option value=\"H\">Apenas homens</option>
+									";
+								}
+							}
+						}
+						?>
+                    </select>
                   </div>
                   <div class="form-group">
                     <label>Apenas com procedimento</label>

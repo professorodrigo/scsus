@@ -1,7 +1,7 @@
 <?php
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//   15/07/2021
+//   06/08/2021
 //   Rodrigo Silva
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -23,41 +23,8 @@ if (ini_get("session.use_cookies")) {
 }
 session_destroy();
 include('sobre.php');
+include('idb1.php');
 
-if (!file_exists("db/scsus.db")){
-	$db = new SQLite3('db/scsus.db');
-	$estrutura = "
-		CREATE TABLE usuarios (
-		  login varchar(11) NOT NULL,
-		  senha char(32) NOT NULL,
-		  logado varchar(14) NOT NULL DEFAULT '00000000000000',
-		  bloqueado int(1) NOT NULL DEFAULT 0,
-		  tent int(1) NOT NULL DEFAULT 0,
-		  cnes varchar(8) NOT NULL DEFAULT '00000000',
-		  ine varchar(10) NOT NULL DEFAULT '0000000000',
-		  tema varchar(20) NOT NULL DEFAULT 'padrao',
-		  perfil varchar(20) NOT NULL DEFAULT 'indicadores',
-		  PRIMARY KEY(login)
-		);
-	";
-	$run_estrutura = $db->query($estrutura);
-	$dados = "
-		INSERT INTO usuarios (login, senha, logado, bloqueado, tent, cnes, ine, tema, perfil) VALUES ('admin', '202cb962ac59075b964b07152d234b70', '00000000000000', 0, 0, '00000000', '0000000000', 'padrao', 'indicadores');
-	";
-	$run_dados = $db->query($dados);
-	$codinstall = date('dmYHis').$sobre['versimp'].rand(0,9).rand(0,9).rand(0,9);
-	$texto = "<?php
-	\$codinstall = '".$codinstall."';
-	\$dtinstall = '".date('Ymd')."';
-	?>\r\n";
-	$file = "config/install.php";
-	if (file_exists($file)){unlink($file);}
-	$fconfig = fopen($file,'w');
-	fwrite($fconfig, $texto);
-	fclose($fconfig);
-	$ctrli = 0;
-	//include 'plugins/ctrli/index.php';
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">

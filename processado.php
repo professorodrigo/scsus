@@ -1,12 +1,3 @@
-<?php
-// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//   06/08/2021
-//   Rodrigo Silva
-// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -14,19 +5,23 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Doe</h1>
+            <h1>Resultado do processamento</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item active">Ajude o projeto</li>
+              <li class="breadcrumb-item active">Arquivo processado</li>
             </ol>
           </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
+
     <!-- Main content -->
     <section class="content">
-		<img src="dist/img/doe1.png" alt="Doar">
+      <div class="error-page">
+        <h2 class="headline text-warning">Concluído</h2>
+        <!-- /.error-content -->
+      </div>
       <!-- /.error-page -->
     </section>
     <!-- /.content -->

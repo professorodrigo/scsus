@@ -9,15 +9,8 @@
 require_once('session.php');
 
 $ap = isset($_GET["ap"]) ? trim($_GET["ap"]) : '';
-$sb = isset($_GET["sb"]) ? trim($_GET["sb"]) : 0;
-$cb = isset($_GET["cb"]) ? trim($_GET["cb"]) : 0;
-$vb = isset($_GET["vb"]) ? trim($_GET["vb"]) : 0;
-
-$fhtml = $ap."_".$_SESSION['key'].".html";
 $fphp = $ap.".php";
-if ($sb == 1){
-	$fphp .= "?sb=1&cb=".$cb."&vb=".$vb;
-}
+
 
 ?>
         <!-- loadingModal-->
@@ -54,23 +47,23 @@ if ($sb == 1){
                 }, 2000);
             }
             function getResponse() {
-                $('#loadingModal_content').html('Carregando...');
+                $('#loadingModal_content').html('Processando...');
                 $('#loadingModal').modal('show');
                 $.post("<?php echo $fphp;?>")
                     .done(function () {
                         $('#loader').removeClass('loader');
                         $('#loader').addClass('glyphicon glyphicon-ok');
                         $('#loadingModal_label').html('Sucesso!');
-                        $('#loadingModal_content').html('<br>Relatorio gerado com sucesso!');
+                        $('#loadingModal_content').html('<br>Arquivo processado com sucesso!');
 						resetModal();
 						
-						$('#main-rel').load('html/<?php echo $fhtml;?>');
+						$('#main-rel').load('processado.php');
                     })
                     .fail(function () {
                         $('#loader').removeClass('loader');
                         $('#loader').addClass('glyphicon glyphicon-remove');
                         $('#loadingModal_label').html('Falha!');
-                        $('#loadingModal_content').html('<br>Relatorio nao gerado!');
+                        $('#loadingModal_content').html('<br>Processamento nao realizado!');
                         resetModal();
                     });
             }

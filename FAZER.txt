@@ -1,0 +1,10 @@
+* Troca de senha
+* cadastro de e-mail do usuário
+* mensagem de troca de senha
+* controle de usuários
+* conversão dos configs para banco
+* passar dados dos arquivos sigtap para o banco
+* tabela de cbo
+* tabela de imunobiologicos
+* tabela de procedimentos
+* relatório de produção de profissional

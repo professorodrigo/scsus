@@ -1,10 +1,11 @@
 <?php
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//   15/07/2021
+//   06/08/2021
 //   Rodrigo Silva
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+date_default_timezone_set('America/Sao_Paulo');
 session_start();
 
 $login = isset($_POST["login"]) ? addslashes(trim($_POST["login"])) : FALSE;
@@ -17,13 +18,15 @@ if(!$login || !$senha) {
 $db = new SQLite3('db/scsus.db');
 $mensagem = "Usuário não encontrado<br>";
 $tent = 0;
+$ctlogin = 0;
 $logado = date('dmYHis');
 $result = $db->query("SELECT * FROM usuarios WHERE login = '".$login."'");
 
 while($array = $result->fetchArray(SQLITE3_ASSOC)){
 	if ($array['bloqueado'] == 0){
 		if ($array['senha'] == $senha){
-			$db->query("UPDATE usuarios SET tent = 0, logado = '".$logado."' WHERE login = '".$login."'");
+			$ctlogin = $array['ctlogin'] + 1;
+			$db->query("UPDATE usuarios SET tent = 0, logado = '".$logado."', dtulogin = ".date('Ymd').", hrulogin = ".date('His').", ctlogin = ".$ctlogin." WHERE login = '".$login."'");
 			$_SESSION['login'] = $login;
 			$_SESSION['logado'] = $logado;
 			$_SESSION['perfil'] = $array['perfil'];
@@ -52,42 +55,4 @@ while($array = $result->fetchArray(SQLITE3_ASSOC)){
 }
 
 echo $mensagem;
-
-/*
-require_once('config/users.php');
-$resultado = false;
-$key = -1;
-for($i=0;$i<=count($sys_log);$i++){
-	if ($login == $sys_log[$i]['login']){
-		$key = $i;
-		break;
-	}
-}
-if ($key >= 0){
-	if ($login == $sys_log[$key]['login']){
-		if ($senha == $sys_log[$key]['senha']){
-			$resultado = true;
-		}
-	}
-}
-if($resultado) {
-	$_SESSION['login'] = $login;
-	$_SESSION['perfil'] = $sys_log[$key]['perfil'];
-	$_SESSION['cnes'] = $sys_log[$key]['cnes'];
-	$_SESSION['ine'] = $sys_log[$key]['ine'];
-	$_SESSION['tema'] = $sys_log[$key]['tema'];
-	$_SESSION['key'] = $key;
-	header('location:principal.php');
-	exit;
-} else {
-	unset ($_SESSION['login']);
-	unset ($_SESSION['perfil']);
-	unset ($_SESSION['cnes']);
-	unset ($_SESSION['ine']);
-	unset ($_SESSION['tema']);
-	unset ($_SESSION['key']);
-	header('location:index.php');
-	exit;
-}
-*/
 ?>

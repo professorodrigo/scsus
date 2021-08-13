@@ -1,11 +1,12 @@
 <?php
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//   15/07/2021
+//   06/08/2021
 //   Rodrigo Silva
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+header("Content-type: text/html; charset=utf-8");
+require_once('functions.php');
 $_UP['pasta'] = 'sigtap/';
 $_UP['tamanho'] = 1024 * 1024 * 2; // 2Mb
 $_UP['extensoes'] = array('zip');
@@ -45,7 +46,7 @@ if (array_search($extensao, $_UP['extensoes']) === false) {
 			unlink('sigtap/DATASUS - Tabela de Procedimentos - Lay-out.xls');
 			unlink('sigtap/config.inf');
 			unlink('sigtap/versao');
-			$msg_final = "Ok! Arquivo enviado";
+			$msg_final = "Ok! Arquivo processado";
 		} else {
 			$msg_final .= "Er: Não foi possível descompactar o arquivo\n";
 		}

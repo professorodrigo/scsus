@@ -1,14 +1,25 @@
 <?php
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//   15/07/2021
+//   06/08/2021
 //   Rodrigo Silva
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 require_once('session.php');
-if (file_exists("config/banco_".$_SESSION['key'].".php")){
-	require_once("config/banco_".$_SESSION['key'].".php");
+
+$db = new SQLite3('db/scsus.db');
+$rows = $db->query("SELECT COUNT(*) as count FROM banco WHERE id = '".$_SESSION['key']."'");
+$row = $rows->fetchArray();
+if ($row['count'] > 0){
+	$result = $db->query("SELECT * FROM banco WHERE id = '".$_SESSION['key']."'");
+	while($array = $result->fetchArray(SQLITE3_ASSOC)){
+		$dbhost = $array['dbhost'];
+		$dbport = $array['dbport'];
+		$dbdb = $array['dbdb'];
+		$dbuser = $array['dbuser'];
+		$dbpass = $array['dbpass'];
+	}
 } else {
 	$dbhost = "localhost";
 	$dbport = "5433";
@@ -16,6 +27,7 @@ if (file_exists("config/banco_".$_SESSION['key'].".php")){
 	$dbuser = "postgres";
 	$dbpass = "esus";
 }
+
 ?>
 
   <!-- Content Wrapper. Contains page content -->

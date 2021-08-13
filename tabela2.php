@@ -5,12 +5,14 @@
 //   Rodrigo Silva
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+ini_set('max_execution_time', 0);
+ini_set("memory_limit", "-1");
+header("Content-type: text/html; charset=utf-8");
 require_once('session.php');
+require_once('functions.php');
 
 $ap = isset($_GET["ap"]) ? trim($_GET["ap"]) : '';
-$fcsv0 = $ap."_".$_SESSION['key'].".csv";
-$fcsv = "csv/".$fcsv0;
+$db = new SQLite3('db/scsus.db');
 
 ?>
 
@@ -21,14 +23,11 @@ $fcsv = "csv/".$fcsv0;
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Tabela CSV</h1>
+            <h1>Tabela <?php echo strtoupper($ap);?></h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item active">
-                <a href="csv.php?rf=<?php echo $fcsv0;?>" class="nav-link">
-                  Download
-                </a>
 			  </li>
             </ol>
           </div>
@@ -42,45 +41,33 @@ $fcsv = "csv/".$fcsv0;
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Dados do CSV gerado no relatório</h3>
+                <h3 class="card-title">Dados da tabela selecionada</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped">
 <?php
 
-$arquivo_rel = fopen($fcsv,'r');
-$n_linha = 1;
-$thead = '';
-while(!feof($arquivo_rel)) {
-	$tr = '';
-	$line = fgets($arquivo_rel);
-	if (strlen($line) > 0){
-		$val_arr = explode(";",$line);
-		if ($n_linha == 1){
-			echo "<thead>";
-			$tr = "<tr>";
-			for($i=0;$i<count($val_arr);$i++){
-				$tr .= "<th>".trim($val_arr[$i])."</th>";
-			}
-			$tr .= "</tr>";
-			$thead = $tr;
-		} else {
-			$tr = "<tr>";
-			for($i=0;$i<count($val_arr);$i++){
-				$tr .= "<td>".trim($val_arr[$i])."</td>";
-			}
-			$tr .= "</tr>";
-		}
-	}
-	echo $tr;
-	if ($n_linha == 1){
-		echo "</thead><tbody>";
-	}
-	$n_linha++;
+$run_colunas = $db->query("SELECT name FROM PRAGMA_TABLE_INFO('".$ap."');");
+echo "<thead><tr>";
+$contc = 0;
+$cabecalho = '';
+while($array = $run_colunas->fetchArray(SQLITE3_ASSOC)){
+	$cabecalho .= "<th>".$array['name']."</th>";
+	$contc++;
 }
-echo "</tbody><tfoot>".$thead."</tfoot>";
-fclose($arquivo_rel);
+echo $cabecalho;
+echo "</tr></thead>";
+echo "<tbody>";
+$result = $db->query("SELECT * FROM ".$ap.";");
+while($array = $result->fetchArray()){
+	echo "<tr>";
+	for ($i=0;$i<$contc;$i++){
+		echo "<td>".$array[$i]."</td>";
+	}
+	echo "</tr>";
+}
+echo "</tbody><tfoot>".$cabecalho."</tfoot>";
 
 ?>
                 </table>

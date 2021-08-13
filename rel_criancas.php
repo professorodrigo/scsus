@@ -1,11 +1,13 @@
 <?php
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//   15/07/2021
+//   06/08/2021
 //   Rodrigo Silva
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+ini_set('max_execution_time', 0);
+ini_set("memory_limit", "-1");
+header("Content-type: text/html; charset=utf-8");
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //   Includes
@@ -13,71 +15,54 @@
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 require_once('session.php');
-
-$mensagem = "";
-if (file_exists("config/banco_".$_SESSION['key'].".php")){
-	require_once("config/banco_".$_SESSION['key'].".php");
-} else {
-	$mensagem = "
-	  <script type=\"text/javascript\">
-		$(document).ready(function() {
-		  var unique_id = $.gritter.add({
-			title: 'ATENÇÃO',
-			text: 'Antes de qualquer coisa configure o DB',
-			image: 'dist/img/user01.png',
-			sticky: false,
-			time: 8000,
-			class_name: 'my-sticky-class'
-		  });
-		  return false;
-		});
-	  </script>
-	";	
-}
-if (file_exists("config/c_rel_v_".$_SESSION['key'].".php")){
-	require_once("config/c_rel_v_".$_SESSION['key'].".php");
-} else {
-	$mensagem = "
-	  <script type=\"text/javascript\">
-		$(document).ready(function() {
-		  var unique_id = $.gritter.add({
-			title: 'ATENÇÃO',
-			text: 'Antes de qualquer coisa configure o relatório',
-			image: 'dist/img/user01.png',
-			sticky: false,
-			time: 8000,
-			class_name: 'my-sticky-class'
-		  });
-		  return false;
-		});
-	  </script>
-	";
-}
-echo $mensagem;
-if (file_exists("config/dados_".$_SESSION['key'].".php")){
-	require_once("config/dados_".$_SESSION['key'].".php");
-} else {
-	$mensagem = "
-	  <script type=\"text/javascript\">
-		$(document).ready(function() {
-		  var unique_id = $.gritter.add({
-			title: 'ATENÇÃO',
-			text: 'Antes de qualquer coisa configure os dados do relatório',
-			image: 'dist/img/user01.png',
-			sticky: false,
-			time: 8000,
-			class_name: 'my-sticky-class'
-		  });
-		  return false;
-		});
-	  </script>
-	";
-}
-echo $mensagem;
-
-require_once('connect.php');
 require_once('functions.php');
 require_once('sobre.php');
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//   Configuracoes do banco SQLite
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+$db = new SQLite3('db/scsus.db');
+$result = $db->query("SELECT * FROM banco WHERE id = '".$_SESSION['key']."'");
+while($array = $result->fetchArray(SQLITE3_ASSOC)){
+	$dbhost = $array['dbhost'];
+	$dbport = $array['dbport'];
+	$dbdb = $array['dbdb'];
+	$dbuser = $array['dbuser'];
+	$dbpass = $array['dbpass'];
+}
+$result = $db->query("SELECT * FROM dados WHERE id = '".$_SESSION['key']."'");
+while($array = $result->fetchArray(SQLITE3_ASSOC)){
+	$cbnome = $array['cbnome'];
+	$cbend1 = $array['cbend1'];
+	$cbend2 = $array['cbend2'];
+	$cbend3 = $array['cbend3'];
+	$cbend4 = $array['cbend4'];
+	$cbcont1 = $array['cbcont1'];
+	$cbcont2 = $array['cbcont2'];
+}
+$result = $db->query("SELECT * FROM vacinas WHERE id = '".$_SESSION['key']."'");
+while($array = $result->fetchArray(SQLITE3_ASSOC)){
+	$dti = $array['dti'];
+	$dtf = $array['dtf'];
+	$gpa = $array['gpa'];
+	$cfa = $array['cfa'];
+	$paginacao = $array['paginacao'];
+	$grupo = $array['grupo'];
+	$ordem = $array['ordem'];
+	$mcabecalho = $array['mcabecalho'];
+	$idin = $array['idin'];
+	$idfi = $array['idfi'];
+	$imbios = $array['imbios'];
+	$apvac = $array['apvac'];
+	$cd3 = $array['cd3'];
+	$des = $array['des'];
+	$tpb = $array['tpb'];
+	$d3c = $array['d3c'];
+}
+require_once('connect.php');
 
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1167,6 +1152,10 @@ if ($nm_sql_2 > 0){
 
 		$imunos_ar = explode(",", $imunos);
 		$dose3 = false;
+		$dose1_1 = false;
+		$dose1_2 = false;
+		$dose2_1 = false;
+		$dose2_2 = false;
 		$dose3_1 = false;
 		$dose3_2 = false;
 		$imunobiologicos = "";
@@ -1335,9 +1324,11 @@ if ($nm_sql_2 > 0){
 								if ($ex_imuno_ar[$m] == '22'){
 									if ($ex_dose_ar[$m] == 1){
 										$conta_polio_1++;
+										$dose1_1 = true;
 									}
 									if ($ex_dose_ar[$m] == 2){
 										$conta_polio_2++;
+										$dose2_1 = true;
 									}
 									if ($ex_dose_ar[$m] == 3){
 										$conta_polio_3++;
@@ -1347,9 +1338,11 @@ if ($nm_sql_2 > 0){
 								if ($ex_imuno_ar[$m] == '42'){
 									if ($ex_dose_ar[$m] == 1){
 										$conta_penta_1++;
+										$dose1_2 = true;
 									}
 									if ($ex_dose_ar[$m] == 2){
 										$conta_penta_2++;
+										$dose2_2 = true;
 									}
 									if ($ex_dose_ar[$m] == 3){
 										$conta_penta_3++;
@@ -1536,9 +1529,11 @@ if ($nm_sql_2 > 0){
 							if ($exmv['co_imunobiologico'] == '22'){
 								if ($exmv['co_dose_imunobiologico'] == 1){
 									$conta_polio_1++;
+									$dose1_1 = true;
 								}
 								if ($exmv['co_dose_imunobiologico'] == 2){
 									$conta_polio_2++;
+									$dose2_1 = true;
 								}
 								if ($exmv['co_dose_imunobiologico'] == 3){
 									$conta_polio_3++;
@@ -1548,9 +1543,11 @@ if ($nm_sql_2 > 0){
 							if ($exmv['co_imunobiologico'] == '42'){
 								if ($exmv['co_dose_imunobiologico'] == 1){
 									$conta_penta_1++;
+									$dose1_2 = true;
 								}
 								if ($exmv['co_dose_imunobiologico'] == 2){
 									$conta_penta_2++;
+									$dose2_2 = true;
 								}
 								if ($exmv['co_dose_imunobiologico'] == 3){
 									$conta_penta_3++;
@@ -1562,15 +1559,28 @@ if ($nm_sql_2 > 0){
 				}
 			}
 		}
-		if ($cd3 == 'E'){
-			if ($dose3_1 && $dose3_2){
-				$dose3 = true;
+		if ($d3c == 0){
+			if ($cd3 == 'E'){
+				if ($dose3_1 && $dose3_2 && $dose2_1 && $dose2_2 && $dose1_1 && $dose1_2){
+					$dose3 = true;
+				}
+			} else {
+				if (($dose3_1 && $dose2_1 && $dose1_1) || ($dose3_2 && $dose2_2 && $dose1_2)){
+					$dose3 = true;
+				}
 			}
 		} else {
-			if ($dose3_1 || $dose3_2){
-				$dose3 = true;
+			if ($cd3 == 'E'){
+				if ($dose3_1 && $dose3_2){
+					$dose3 = true;
+				}
+			} else {
+				if ($dose3_1 || $dose3_2){
+					$dose3 = true;
+				}
 			}
 		}
+
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		//   FAMILIA

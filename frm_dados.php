@@ -1,14 +1,27 @@
 <?php
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//   15/07/2021
+//   06/08/2021
 //   Rodrigo Silva
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 require_once('session.php');
-if (file_exists("config/dados_".$_SESSION['key'].".php")){
-	require_once("config/dados_".$_SESSION['key'].".php");
+
+$db = new SQLite3('db/scsus.db');
+$rows = $db->query("SELECT COUNT(*) as count FROM dados WHERE id = '".$_SESSION['key']."'");
+$row = $rows->fetchArray();
+if ($row['count'] > 0){
+	$result = $db->query("SELECT * FROM dados WHERE id = '".$_SESSION['key']."'");
+	while($array = $result->fetchArray(SQLITE3_ASSOC)){
+		$cbnome = $array['cbnome'];
+		$cbend1 = $array['cbend1'];
+		$cbend2 = $array['cbend2'];
+		$cbend3 = $array['cbend3'];
+		$cbend4 = $array['cbend4'];
+		$cbcont1 = $array['cbcont1'];
+		$cbcont2 = $array['cbcont2'];
+	}
 } else {
 	$cbnome = "Secretaria Municipal de Saúde de Teste";
 	$cbend1 = "Avenida Sete de Setembro, número 29387 - Sala 2";
@@ -18,6 +31,7 @@ if (file_exists("config/dados_".$_SESSION['key'].".php")){
 	$cbcont1 = "+55 (47) 23432-9384 | +55 (47) 12384-3234";
 	$cbcont2 = "contatosaude@saomatheus.gov.br | www.saomatheuspref.gov.br";
 }
+
 ?>
 
   <!-- Content Wrapper. Contains page content -->
