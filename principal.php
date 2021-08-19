@@ -22,7 +22,7 @@ $mensagem = '';
 include('idb2.php');
 
 if (date('d') == 10){
-	$mensagem = "
+	$mensagem .= "
 	  <script type=\"text/javascript\">
 		$(document).ready(function() {
 		  var unique_id = $.gritter.add({
@@ -39,13 +39,40 @@ if (date('d') == 10){
 	";	
 }
 if (date('d') == 28){
-	$mensagem = "
+	$mensagem .= "
 	  <script type=\"text/javascript\">
 		$(document).ready(function() {
 		  var unique_id = $.gritter.add({
 			title: 'Gostando do projeto?',
 			text: 'Não deixe o projeto morrer, ajude, é simples, qualquer valor via PIX',
 			image: 'dist/img/userm.jpg',
+			sticky: true,
+			//time: 8000,
+			class_name: 'my-sticky-class'
+		  });
+		  return false;
+		});
+	  </script>
+	";	
+}
+
+$db = new SQLite3('db/scsus.db');
+$result = $db->query("SELECT * FROM usuarios WHERE login = '".$_SESSION['login']."'");
+$tmpsenha = 0;
+$nome = '';
+while($array = $result->fetchArray(SQLITE3_ASSOC)){
+	$tmpsenha = $array['tmpsenha'];
+	$nome = $array['nome'];
+}
+
+if ($tmpsenha == 1){
+	$mensagem .= "
+	  <script type=\"text/javascript\">
+		$(document).ready(function() {
+		  var unique_id = $.gritter.add({
+			title: 'Altere sua senha',
+			text: 'Sua senha é temporária, é necessário alterar a senha',
+			image: 'dist/img/user01.png',
 			sticky: true,
 			//time: 8000,
 			class_name: 'my-sticky-class'
@@ -177,7 +204,7 @@ if (date('Ymd') > datasomadias($dtinstall,5)){
           <img src="dist/img/user2-160x160.png" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block"><?php echo "[".$_SESSION['key']."] ".$_SESSION['login'];?></a>
+          <a href="#" class="d-block"><?php echo "[".$_SESSION['login']."]<br>".$nome;?></a>
         </div>
       </div>
 	  <div id="main-menu">

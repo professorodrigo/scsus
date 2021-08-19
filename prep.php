@@ -13,7 +13,7 @@ $sb = isset($_GET["sb"]) ? trim($_GET["sb"]) : 0;
 $cb = isset($_GET["cb"]) ? trim($_GET["cb"]) : 0;
 $vb = isset($_GET["vb"]) ? trim($_GET["vb"]) : 0;
 
-$fhtml = $ap."_".$_SESSION['key'].".html";
+$fhtml = $ap."_".$_SESSION['login'].".html";
 $fphp = $ap.".php";
 if ($sb == 1){
 	$fphp .= "?sb=1&cb=".$cb."&vb=".$vb;

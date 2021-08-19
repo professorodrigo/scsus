@@ -19,6 +19,23 @@ function dataint($data,$tp="t"){
 function cmp($a, $b) {
 	return $a['data'] > $b['data'];
 }
+function removeDirectory($path) {
+	$files = glob($path . '/*');
+	foreach ($files as $file) {
+		is_dir($file) ? removeDirectory($file) : unlink($file);
+	}
+	rmdir($path);
+	return;
+}
+function delArqCor($caminho,$arquivo) {
+	$files = glob($caminho.'/*');
+	foreach ($files as $file) {
+		if (strpos($file, $arquivo) !== false) {
+			unlink($file);
+		}
+	}
+	return;
+}
 function datamostra($data,$t=0){
 	if ($t == 0){ // 2021-03-20
 		$dts = explode('-',$data);
@@ -32,6 +49,13 @@ function datamostra($data,$t=0){
 function dtshow($data){ // 20210320
 	$ndi = substr($data,6,2)."/".substr($data,4,2)."/".substr($data,0,4);
 	return $ndi;
+}
+function hrshow($hora){ // 205545 -> 20:55:45
+	if (strlen($hora) < 6){
+		$hora = '0'.$hora;
+	}
+	$nhi = substr($hora,0,2).":".substr($hora,2,2).":".substr($hora,4,2);
+	return $nhi;
 }
 function zeroesq($num,$nz,$inc=0){
 	$strfinal = '';

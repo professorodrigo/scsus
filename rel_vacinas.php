@@ -25,7 +25,7 @@ require_once('sobre.php');
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 $db = new SQLite3('db/scsus.db');
-$result = $db->query("SELECT * FROM banco WHERE id = '".$_SESSION['key']."'");
+$result = $db->query("SELECT * FROM banco WHERE id = '".$_SESSION['login']."'");
 while($array = $result->fetchArray(SQLITE3_ASSOC)){
 	$dbhost = $array['dbhost'];
 	$dbport = $array['dbport'];
@@ -33,7 +33,7 @@ while($array = $result->fetchArray(SQLITE3_ASSOC)){
 	$dbuser = $array['dbuser'];
 	$dbpass = $array['dbpass'];
 }
-$result = $db->query("SELECT * FROM dados WHERE id = '".$_SESSION['key']."'");
+$result = $db->query("SELECT * FROM dados WHERE id = '".$_SESSION['login']."'");
 while($array = $result->fetchArray(SQLITE3_ASSOC)){
 	$cbnome = $array['cbnome'];
 	$cbend1 = $array['cbend1'];
@@ -43,7 +43,7 @@ while($array = $result->fetchArray(SQLITE3_ASSOC)){
 	$cbcont1 = $array['cbcont1'];
 	$cbcont2 = $array['cbcont2'];
 }
-$result = $db->query("SELECT * FROM vacinas WHERE id = '".$_SESSION['key']."'");
+$result = $db->query("SELECT * FROM vacinas WHERE id = '".$_SESSION['login']."'");
 while($array = $result->fetchArray(SQLITE3_ASSOC)){
 	$dti = $array['dti'];
 	$dtf = $array['dtf'];
@@ -71,17 +71,17 @@ require_once('connect.php');
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 // -----------------------------------------------------------------------
-$file = "html/rel_vacinas_".$_SESSION['key'].".html";
+$file = "html/rel_vacinas_".$_SESSION['login'].".html";
 if (file_exists($file)){unlink($file);}
 $HTML = fopen($file,'w');
 // -----------------------------------------------------------------------
-$file = "csv/vacinados_T_".$_SESSION['key'].".csv";
+$file = "csv/vacinados_T_".$_SESSION['login'].".csv";
 if (file_exists($file)){unlink($file);}
 $FT = fopen($file,'w');
 $texto = "Seq;CPF;CNS;Nome;DtNascimento;Mae;Idade;MarcGestante;MarcHipertensa;MarcDiabetica;CNES;INE;MA\r\n";
 fwrite($FT, $texto);
 // -----------------------------------------------------------------------
-$file = "csv/vacinados_V_".$_SESSION['key'].".csv";
+$file = "csv/vacinados_V_".$_SESSION['login'].".csv";
 if (file_exists($file)){unlink($file);}
 $FV = fopen($file,'w');
 $texto = "Seq;CPF;CNS;DtProced;Dose;CNES;INE;CBO;Imunobiologico;Lote;Fabricante;CNSProf;NomeProf;ImunoSigla;ImunoNome;GrupoAt;RegAnt;Tabela\r\n";
@@ -183,8 +183,8 @@ $rel_pagina_inicio = "
 fwrite($HTML, $rel_pagina_inicio);
 // ===========================================================================================================
 $imglogo = "logom.jpg";
-if (file_exists("plugins/scsus/temas/".$_SESSION['tema']."/img/logom_".$_SESSION['key'].".jpg")){
-	$imglogo = "logom_".$_SESSION['key'].".jpg";
+if (file_exists("plugins/scsus/temas/".$_SESSION['tema']."/img/logom_".$_SESSION['login'].".jpg")){
+	$imglogo = "logom_".$_SESSION['login'].".jpg";
 }
 if ($mcabecalho == 1){
 	// ===========================================================================================================

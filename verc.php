@@ -9,7 +9,7 @@
 require_once('session.php');
 
 $ap = isset($_GET["ap"]) ? trim($_GET["ap"]) : '';
-$fcsv = "csv/".$ap."_".$_SESSION['key'].".csv";
+$fcsv = "csv/".$ap."_".$_SESSION['login'].".csv";
 
 $fcarregar = "tabela.php?ap=".$ap;
 if (!file_exists($fcsv)){

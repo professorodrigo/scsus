@@ -39,11 +39,16 @@ $estrutura = "
 		cbend4 varchar (250),
 		cbcont1 varchar (250),
 		cbcont2 varchar (250),
+		ibge INT DEFAULT (0),
+		popibge BIGINT DEFAULT (0),
+		poppar BIGINT DEFAULT (0),
+		popesf BIGINT DEFAULT (0),
+		classmun varchar (30) DEFAULT 'Urbano',
 		PRIMARY KEY (id)
 	);
 ";
 $run_estrutura = $db->query($estrutura);
-$rows = $db->query("SELECT COUNT(*) as count FROM dados WHERE id = '".$_SESSION['key']."'");
+$rows = $db->query("SELECT COUNT(*) as count FROM dados WHERE id = '".$_SESSION['login']."'");
 $row = $rows->fetchArray();
 if ($row['count'] <= 0){
 	$dados = "
@@ -57,7 +62,7 @@ if ($row['count'] <= 0){
 			cbcont1, 
 			cbcont2
 		) VALUES (
-			'".$_SESSION['key']."',
+			'".$_SESSION['login']."',
 			'Secretaria Municipal de Saúde de Teste', 
 			'Avenida Sete de Setembro, número 29387 - Sala 2', 
 			'Bairro Matarazzo Caprinio', 
@@ -88,7 +93,7 @@ $estrutura = "
 	);
 ";
 $run_estrutura = $db->query($estrutura);
-$rows = $db->query("SELECT COUNT(*) as count FROM diabeticos WHERE id = '".$_SESSION['key']."'");
+$rows = $db->query("SELECT COUNT(*) as count FROM diabeticos WHERE id = '".$_SESSION['login']."'");
 $row = $rows->fetchArray();
 if ($row['count'] <= 0){
 	$dados = "
@@ -105,7 +110,7 @@ if ($row['count'] <= 0){
 			grupo, 
 			ordem
 		) VALUES (
-			'".$_SESSION['key']."',
+			'".$_SESSION['login']."',
 			".$dti.", 
 			".$dtf.", 
 			0, 
@@ -147,7 +152,7 @@ $estrutura = "
 	);
 ";
 $run_estrutura = $db->query($estrutura);
-$rows = $db->query("SELECT COUNT(*) as count FROM vacinas WHERE id = '".$_SESSION['key']."'");
+$rows = $db->query("SELECT COUNT(*) as count FROM vacinas WHERE id = '".$_SESSION['login']."'");
 $row = $rows->fetchArray();
 if ($row['count'] <= 0){
 	$dados = "
@@ -172,7 +177,7 @@ if ($row['count'] <= 0){
 			grupo, 
 			ordem
 		) VALUES (
-			'".$_SESSION['key']."',
+			'".$_SESSION['login']."',
 			".$dti.", 
 			".$dtf.", 
 			0, 
@@ -216,7 +221,7 @@ $estrutura = "
 	);
 ";
 $run_estrutura = $db->query($estrutura);
-$rows = $db->query("SELECT COUNT(*) as count FROM gestantes WHERE id = '".$_SESSION['key']."'");
+$rows = $db->query("SELECT COUNT(*) as count FROM gestantes WHERE id = '".$_SESSION['login']."'");
 $row = $rows->fetchArray();
 if ($row['count'] <= 0){
 	$dados = "
@@ -235,7 +240,7 @@ if ($row['count'] <= 0){
 			grupo, 
 			ordem
 		) VALUES (
-			'".$_SESSION['key']."',
+			'".$_SESSION['login']."',
 			".$dti.", 
 			".$dtf.", 
 			0, 
@@ -271,7 +276,7 @@ $estrutura = "
 	);
 ";
 $run_estrutura = $db->query($estrutura);
-$rows = $db->query("SELECT COUNT(*) as count FROM hipertensos WHERE id = '".$_SESSION['key']."'");
+$rows = $db->query("SELECT COUNT(*) as count FROM hipertensos WHERE id = '".$_SESSION['login']."'");
 $row = $rows->fetchArray();
 if ($row['count'] <= 0){
 	$dados = "
@@ -288,7 +293,7 @@ if ($row['count'] <= 0){
 			grupo, 
 			ordem
 		) VALUES (
-			'".$_SESSION['key']."',
+			'".$_SESSION['login']."',
 			".$dti.", 
 			".$dtf.", 
 			0, 
@@ -329,7 +334,7 @@ $estrutura = "
 	);
 ";
 $run_estrutura = $db->query($estrutura);
-$rows = $db->query("SELECT COUNT(*) as count FROM mulheres WHERE id = '".$_SESSION['key']."'");
+$rows = $db->query("SELECT COUNT(*) as count FROM mulheres WHERE id = '".$_SESSION['login']."'");
 $row = $rows->fetchArray();
 if ($row['count'] <= 0){
 	$dados = "
@@ -353,7 +358,7 @@ if ($row['count'] <= 0){
 			ordem,
 			moh
 		) VALUES (
-			'".$_SESSION['key']."',
+			'".$_SESSION['login']."',
 			".$dti.", 
 			".$dtf.", 
 			0, 
@@ -389,7 +394,7 @@ $estrutura = "
 	);
 ";
 $run_estrutura = $db->query($estrutura);
-$rows = $db->query("SELECT COUNT(*) as count FROM banco WHERE id = '".$_SESSION['key']."'");
+$rows = $db->query("SELECT COUNT(*) as count FROM banco WHERE id = '".$_SESSION['login']."'");
 $row = $rows->fetchArray();
 if ($row['count'] <= 0){
 	$dados = "
@@ -401,7 +406,7 @@ if ($row['count'] <= 0){
 			dbuser,
 			dbpass
 		) VALUES (
-			'".$_SESSION['key']."',
+			'".$_SESSION['login']."',
 			'localhost', 
 			'5433', 
 			'esus', 
@@ -410,7 +415,7 @@ if ($row['count'] <= 0){
 		);
 	";
 	$run_dados = $db->query($dados);
-	$mensagem = "
+	$mensagem .= "
 	  <script type=\"text/javascript\">
 		$(document).ready(function() {
 		  var unique_id = $.gritter.add({
@@ -441,7 +446,7 @@ $estrutura = "
 	);
 ";
 $run_estrutura = $db->query($estrutura);
-$rows = $db->query("SELECT COUNT(*) as count FROM duplicados WHERE id = '".$_SESSION['key']."'");
+$rows = $db->query("SELECT COUNT(*) as count FROM duplicados WHERE id = '".$_SESSION['login']."'");
 $row = $rows->fetchArray();
 if ($row['count'] <= 0){
 	$dados = "
@@ -454,7 +459,7 @@ if ($row['count'] <= 0){
 			grupo, 
 			ordem
 		) VALUES (
-			'".$_SESSION['key']."',
+			'".$_SESSION['login']."',
 			0, 
 			0,  
 			0, 
@@ -561,4 +566,52 @@ $estrutura = "
 	);
 ";
 $run_estrutura = $db->query($estrutura);
+/********************************************************************************************
+   CONFIG
+********************************************************************************************/
+$estrutura = "
+	CREATE TABLE if not exists config (
+		id int PRIMARY KEY NOT NULL, 
+		smtp_email VARCHAR (100), 
+		smtp_usuario VARCHAR (100),  
+		smtp_senha VARCHAR (20), 
+		smtp_servidor VARCHAR (100), 
+		smtp_porta VARCHAR (10), 
+		smtp_cript VARCHAR (10),
+		smtp_html VARCHAR (5),
+		smtp_aut VARCHAR (5),
+		smtp_tsen VARCHAR (5)
+	);
+";
+$run_estrutura = $db->query($estrutura);
+$rows = $db->query("SELECT COUNT(*) as count FROM config WHERE id = 1");
+$row = $rows->fetchArray();
+if ($row['count'] <= 0){
+	$dados = "
+		INSERT INTO config (
+			id, 
+			smtp_email, 
+			smtp_usuario,  
+			smtp_senha, 
+			smtp_servidor, 
+			smtp_porta, 
+			smtp_cript,
+			smtp_html,
+			smtp_aut,
+			smtp_tsen
+		) VALUES (
+			1,
+			'', 
+			'',  
+			'', 
+			'', 
+			'587', 
+			'tls',
+			'true',
+			'true',
+			'false'
+		);
+	";
+	$run_dados = $db->query($dados);
+}
 ?>

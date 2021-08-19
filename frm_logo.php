@@ -64,8 +64,8 @@ $fphp = $ap.".php";
             <!-- /.card -->
 			<?php
 			
-				if (file_exists("plugins/scsus/temas/".$_SESSION['tema']."/img/logom_".$_SESSION['key'].".jpg")){
-					echo "<img src=\"plugins/scsus/temas/".$_SESSION['tema']."/img/logom_".$_SESSION['key'].".jpg\" width=\"145\" height=\"145\" border=\"0\">";
+				if (file_exists("plugins/scsus/temas/".$_SESSION['tema']."/img/logom_".$_SESSION['login'].".jpg")){
+					echo "<img src=\"plugins/scsus/temas/".$_SESSION['tema']."/img/logom_".$_SESSION['login'].".jpg\" width=\"145\" height=\"145\" border=\"0\">";
 				}
 			
 			?>

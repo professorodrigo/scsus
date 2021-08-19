@@ -5,12 +5,30 @@
 //   Rodrigo Silva
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+ini_set('max_execution_time', 0);
+ini_set("memory_limit", "-1");
+header("Content-type: text/html; charset=utf-8");
 require_once('session.php');
+require_once('functions.php');
 
-$ap = isset($_GET["ap"]) ? trim($_GET["ap"]) : '';
-$fcsv0 = $ap."_".$_SESSION['login'].".csv";
-$fcsv = "csv/".$fcsv0;
+$db = new SQLite3('db/scsus.db');
+$result = $db->query("SELECT * FROM banco WHERE id = '".$_SESSION['login']."'");
+while($array = $result->fetchArray(SQLITE3_ASSOC)){
+	$dbhost = $array['dbhost'];
+	$dbport = $array['dbport'];
+	$dbdb = $array['dbdb'];
+	$dbuser = $array['dbuser'];
+	$dbpass = $array['dbpass'];
+}
+require_once('connect.php');
+
+$nome_rel = "IMUNOBIOLÓGICOS";
+$tabela = 'tb_dim_imunobiologico';
+$condicao = "st_registro_valido = 1";
+$campo = array();
+$campo[0][0] = 'nu_identificador';	$campo[0][1] = 'Codigo';
+$campo[1][0] = 'sg_imunobiologico';	$campo[1][1] = 'Sigla';
+$campo[2][0] = 'no_imunobiologico';	$campo[2][1] = 'Nome';
 
 ?>
 
@@ -21,14 +39,11 @@ $fcsv = "csv/".$fcsv0;
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Tabela CSV</h1>
+            <h1>Tabela <?php echo $nome_rel;?></h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item active">
-                <a href="csv.php?rf=<?php echo $fcsv0;?>" class="nav-link">
-                  Download
-                </a>
 			  </li>
             </ol>
           </div>
@@ -42,45 +57,38 @@ $fcsv = "csv/".$fcsv0;
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Dados do CSV gerado no relatório</h3>
+                <h3 class="card-title">Dados da tabela selecionada</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped">
 <?php
 
-$arquivo_rel = fopen($fcsv,'r');
-$n_linha = 1;
-$thead = '';
-while(!feof($arquivo_rel)) {
-	$tr = '';
-	$line = fgets($arquivo_rel);
-	if (strlen($line) > 0){
-		$val_arr = explode(";",$line);
-		if ($n_linha == 1){
-			echo "<thead>";
-			$tr = "<tr>";
-			for($i=0;$i<count($val_arr);$i++){
-				$tr .= "<th>".trim($val_arr[$i])."</th>";
-			}
-			$tr .= "</tr>";
-			$thead = $tr;
-		} else {
-			$tr = "<tr>";
-			for($i=0;$i<count($val_arr);$i++){
-				$tr .= "<td>".trim($val_arr[$i])."</td>";
-			}
-			$tr .= "</tr>";
-		}
-	}
-	echo $tr;
-	if ($n_linha == 1){
-		echo "</thead><tbody>";
-	}
-	$n_linha++;
+echo "<thead><tr>";
+$soma_campos = '';
+$cabecalho = '';
+for ($i=0;$i<count($campo);$i++){
+	$soma_campos .= $campo[$i][0].',';
+	$cabecalho .= "<th>".$campo[$i][1]."</th>";
 }
-echo "</tbody><tfoot>".$thead."</tfoot>";
-fclose($arquivo_rel);
+$soma_campos = substr($soma_campos,0,-1);
+echo $cabecalho;
+echo "</tr></thead>";
+echo "<tbody>";
+
+$run_s1 = pg_query($cdb,"SELECT ".$soma_campos." FROM ".$tabela." WHERE ".$condicao);
+$nm_sql_1 = 0;
+$nm_sql_1 = pg_num_rows($run_s1);
+if ($nm_sql_1 > 0){
+	while ($result1 = pg_fetch_array($run_s1)){
+		echo "<tr>";
+			for ($i=0;$i<count($campo);$i++){
+				echo "<td>".$result1[$campo[$i][0]]."</td>";
+			}
+		echo "</tr>";
+	}
+}
+echo "</tbody><tfoot>".$cabecalho."</tfoot>";
 
 ?>
                 </table>

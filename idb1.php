@@ -14,18 +14,24 @@ if (!file_exists("db/scsus.db")){
 	$estrutura = "
 		CREATE TABLE usuarios (
 			login varchar (11) NOT NULL, 
+			nome varchar (200) DEFAULT 'SN',
+			telefone varchar (20) DEFAULT '(99)99999-9999',
 			senha char (32) NOT NULL, 
 			logado varchar (14) NOT NULL DEFAULT '00000000000000', 
 			bloqueado int (1) NOT NULL DEFAULT 0, 
 			tent int (1) NOT NULL DEFAULT 0, 
-			cnes varchar (8) NOT NULL DEFAULT '00000000', 
+			cnes varchar (8) NOT NULL DEFAULT '0000000', 
 			ine varchar (10) NOT NULL DEFAULT '0000000000', 
 			tema varchar (20) NOT NULL DEFAULT 'padrao', 
 			email varchar (150) NOT NULL DEFAULT 'admin@admin', 
-			perfil varchar (20) NOT NULL DEFAULT 'indicadores', 
+			perfil varchar (20) NOT NULL DEFAULT 'usuario', 
 			dtulogin BIGINT DEFAULT (30001231), 
 			hrulogin BIGINT DEFAULT (0), 
 			ctlogin BIGINT DEFAULT (0), 
+			usenha char (32) NOT NULL,
+			tptsenha int DEFAULT (180),
+			tmpsenha int DEFAULT (0),
+			iduss char (32) NOT NULL,
 			PRIMARY KEY (login)
 		);
 	";
@@ -33,6 +39,8 @@ if (!file_exists("db/scsus.db")){
 	$dados = "
 		INSERT INTO usuarios (
 			login, 
+			nome,
+			telefone,
 			senha, 
 			logado, 
 			bloqueado, 
@@ -44,21 +52,31 @@ if (!file_exists("db/scsus.db")){
 			perfil, 
 			dtulogin, 
 			hrulogin, 
-			ctlogin
+			ctlogin,
+			usenha,
+			tptsenha,
+			tmpsenha,
+			iduss
 		) VALUES (
 			'admin', 
+			'Administrador',
+			'(99)99999-9999',
 			'202cb962ac59075b964b07152d234b70', 
-			'09082021203952', 
+			'0', 
 			0, 
 			0, 
-			'00000000', 
+			'0000000', 
 			'0000000000', 
 			'padrao', 
 			'admin@admin', 
-			'indicadores', 
+			'admin', 
 			30001231, 
 			0, 
-			0
+			0,
+			'202cb962ac59075b964b07152d234b70',
+			180,
+			0,
+			'202cb962ac59075b964b07152d234b70'
 		);
 	";
 	$run_dados = $db->query($dados);
@@ -76,8 +94,8 @@ if (!file_exists("db/scsus.db")){
 	$ctrli = 0;
 	//include 'plugins/ctrli/index.php';
 	
-	$respas = rand(0,9).rand(0,9).rand(0,9).$codinstall.rand(0,9).rand(0,9).rand(0,9);
-	$texto = "<?php
+	$respas = 'rss'.rand(0,9).rand(0,9).rand(0,9).$codinstall.rand(0,9).rand(0,9).rand(0,9);
+	$texto = "
 	<?php
 	\$db = new SQLite3('db/scsus.db');
 	\$db->query(\"UPDATE usuarios SET tent = 0, bloqueado = 0, senha = '202cb962ac59075b964b07152d234b70' WHERE login = 'admin'\");

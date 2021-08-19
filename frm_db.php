@@ -9,10 +9,10 @@
 require_once('session.php');
 
 $db = new SQLite3('db/scsus.db');
-$rows = $db->query("SELECT COUNT(*) as count FROM banco WHERE id = '".$_SESSION['key']."'");
+$rows = $db->query("SELECT COUNT(*) as count FROM banco WHERE id = '".$_SESSION['login']."'");
 $row = $rows->fetchArray();
 if ($row['count'] > 0){
-	$result = $db->query("SELECT * FROM banco WHERE id = '".$_SESSION['key']."'");
+	$result = $db->query("SELECT * FROM banco WHERE id = '".$_SESSION['login']."'");
 	while($array = $result->fetchArray(SQLITE3_ASSOC)){
 		$dbhost = $array['dbhost'];
 		$dbport = $array['dbport'];

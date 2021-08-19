@@ -8,9 +8,9 @@
 
 $sobre = array();
 	$sobre['nome'] = "sc-SUS";
-	$sobre['versao'] = "5.0.5 Beta 5";
-	$sobre['versimp'] = "505B5";
-	$sobre['alteracao'] = "13/08/2021";
+	$sobre['versao'] = "5.0.5";
+	$sobre['versimp'] = "505";
+	$sobre['alteracao'] = "19/08/2021";
 	$sobre['repositorio1'] = "https://github.com/professorodrigo/scsus";
 	$sobre['repositorio2'] = "https://sourceforge.net/projects/sc-sus/";
 	$sobre['ferramentas'] = "https://drive.google.com/drive/folders/1G5ioi_bKRk5I4BTCy0A3rJFSTxQ1JQ2B";
@@ -37,6 +37,6 @@ $colaboradores = array();
 	$colaboradores[3]['nome'] = "Joceilton Gomes";
 	$colaboradores[3]['funcao'] = "Divulgador";
 	$colaboradores[3]['email'] = "joceiltongomes@gmail.com";
-	$colaboradores[3]['tw'] = "+55 98 7002-3555";
+	$colaboradores[3]['tw'] = "+55 98 97002-3555";
 	
 ?>

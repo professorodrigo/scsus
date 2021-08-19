@@ -7,6 +7,10 @@
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 session_start();
+
+$db = new SQLite3('db/scsus.db');
+$db->query("UPDATE usuarios SET logado = '0' WHERE login = '".$_SESSION['login']."'");
+
 $_SESSION = array();
 if (ini_get("session.use_cookies")) {
     $params = session_get_cookie_params();

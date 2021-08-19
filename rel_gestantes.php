@@ -25,7 +25,7 @@ require_once('sobre.php');
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 $db = new SQLite3('db/scsus.db');
-$result = $db->query("SELECT * FROM banco WHERE id = '".$_SESSION['key']."'");
+$result = $db->query("SELECT * FROM banco WHERE id = '".$_SESSION['login']."'");
 while($array = $result->fetchArray(SQLITE3_ASSOC)){
 	$dbhost = $array['dbhost'];
 	$dbport = $array['dbport'];
@@ -33,7 +33,7 @@ while($array = $result->fetchArray(SQLITE3_ASSOC)){
 	$dbuser = $array['dbuser'];
 	$dbpass = $array['dbpass'];
 }
-$result = $db->query("SELECT * FROM dados WHERE id = '".$_SESSION['key']."'");
+$result = $db->query("SELECT * FROM dados WHERE id = '".$_SESSION['login']."'");
 while($array = $result->fetchArray(SQLITE3_ASSOC)){
 	$cbnome = $array['cbnome'];
 	$cbend1 = $array['cbend1'];
@@ -43,7 +43,7 @@ while($array = $result->fetchArray(SQLITE3_ASSOC)){
 	$cbcont1 = $array['cbcont1'];
 	$cbcont2 = $array['cbcont2'];
 }
-$result = $db->query("SELECT * FROM gestantes WHERE id = '".$_SESSION['key']."'");
+$result = $db->query("SELECT * FROM gestantes WHERE id = '".$_SESSION['login']."'");
 while($array = $result->fetchArray(SQLITE3_ASSOC)){
 	$dti = $array['dti'];
 	$dtf = $array['dtf'];
@@ -67,23 +67,23 @@ require_once('connect.php');
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 // -----------------------------------------------------------------------
-$file = "html/rel_gestantes_".$_SESSION['key'].".html";
+$file = "html/rel_gestantes_".$_SESSION['login'].".html";
 if (file_exists($file)){unlink($file);}
 $HTML = fopen($file,'w');
 // -----------------------------------------------------------------------
-$file = "csv/gestantes_T_".$_SESSION['key'].".csv";
+$file = "csv/gestantes_T_".$_SESSION['login'].".csv";
 if (file_exists($file)){unlink($file);}
 $FT = fopen($file,'w');
 $texto = "Seq;CPF;CNS;Nome;DtNascimento;Mae;Idade;MarcGestante;MarcHipertensa;MarcDiabetica;Interrupcao;InterCC;DUM;20s;DPP;FimPuerperio;NumConsultas;DtPrimConsulta;NumConsOdonto;Indicador1;Indicador2;Indicador3;Sexo;CNES;INE;MA;uuidFicha;uuidFichaOrigem;uuidDadoTransp\r\n";
 fwrite($FT, $texto);
 // -----------------------------------------------------------------------
-$file = "csv/gestantes_C_".$_SESSION['key'].".csv";
+$file = "csv/gestantes_C_".$_SESSION['login'].".csv";
 if (file_exists($file)){unlink($file);}
 $FC = fopen($file,'w');
 $texto = "Seq;CPF;CNS;DtConsulta;DUMdaCons;CNES;INE;CBO;CNSProf;NomeProf;ProfAlerta;uuidFicha;uuidDadoTransp\r\n";
 fwrite($FC, $texto);
 // -----------------------------------------------------------------------
-$file = "csv/gestantes_P_".$_SESSION['key'].".csv";
+$file = "csv/gestantes_P_".$_SESSION['login'].".csv";
 if (file_exists($file)){unlink($file);}
 $FP = fopen($file,'w');
 $texto = "Seq;CPF;CNS;DtProced;DtCons;Tabela;CNSProf;NomeProf;CNES;INE;CBO;Exame;Procedimento(A/S);ProfAlerta;uuidFicha;uuidDadoTransp\r\n";
@@ -204,8 +204,8 @@ $rel_pagina_inicio = "
 fwrite($HTML, $rel_pagina_inicio);
 // ===========================================================================================================
 $imglogo = "logom.jpg";
-if (file_exists("plugins/scsus/temas/".$_SESSION['tema']."/img/logom_".$_SESSION['key'].".jpg")){
-	$imglogo = "logom_".$_SESSION['key'].".jpg";
+if (file_exists("plugins/scsus/temas/".$_SESSION['tema']."/img/logom_".$_SESSION['login'].".jpg")){
+	$imglogo = "logom_".$_SESSION['login'].".jpg";
 }
 if ($mcabecalho == 1){
 	// ===========================================================================================================
@@ -3013,13 +3013,13 @@ if ($paginacao <= 0 || $nm_sql_2 == 0){
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	$denominador_final = $conta_geral - $conta_geral_desconto;
-	$file = "resumo/r_ind1_".$_SESSION['key'].".php";
+	$file = "resumo/r_ind1_".$_SESSION['login'].".php";
 	if (file_exists($file)){unlink($file);}
 	$FI1 = fopen($file,'w');
-	$file = "resumo/r_ind2_".$_SESSION['key'].".php";
+	$file = "resumo/r_ind2_".$_SESSION['login'].".php";
 	if (file_exists($file)){unlink($file);}
 	$FI2 = fopen($file,'w');
-	$file = "resumo/r_ind3_".$_SESSION['key'].".php";
+	$file = "resumo/r_ind3_".$_SESSION['login'].".php";
 	if (file_exists($file)){unlink($file);}
 	$FI3 = fopen($file,'w');
 	$porc_in1 = 0;

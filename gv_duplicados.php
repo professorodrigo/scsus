@@ -25,7 +25,7 @@ $update = "
 		   paginacao = '".$paginacao."',
 		   mcabecalho = '".$mcabecalho."',
 		   ordem = '".$ordem."'
-	 WHERE id = '".$_SESSION['key']."';
+	 WHERE id = '".$_SESSION['login']."';
 ";
 $run_estrutura = $db->query($update);
 

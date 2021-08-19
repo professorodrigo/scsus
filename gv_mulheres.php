@@ -72,7 +72,7 @@ $update = "
 		   grupo = '".$grupo."',
 		   ordem = '".$ordem."',
 		   moh = '".$moh."'
-	 WHERE id = '".$_SESSION['key']."';
+	 WHERE id = '".$_SESSION['login']."';
 ";
 $run_estrutura = $db->query($update);
 

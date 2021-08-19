@@ -24,7 +24,7 @@ $update = "
 		   dbdb = '".$dbdb."',
 		   dbuser = '".$dbuser."',
 		   dbpass = '".$dbpass."'
-	 WHERE id = '".$_SESSION['key']."';
+	 WHERE id = '".$_SESSION['login']."';
 ";
 $run_estrutura = $db->query($update);
 ?>

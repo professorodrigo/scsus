@@ -10,7 +10,7 @@ require_once('session.php');
 require_once('functions.php');
 
 $db = new SQLite3('db/scsus.db');
-$result = $db->query("SELECT * FROM dados WHERE id = '".$_SESSION['key']."'");
+$result = $db->query("SELECT * FROM dados WHERE id = '".$_SESSION['login']."'");
 while($array = $result->fetchArray(SQLITE3_ASSOC)){
 	$cbnome = $array['cbnome'];
 	$cbend1 = $array['cbend1'];
@@ -24,8 +24,8 @@ while($array = $result->fetchArray(SQLITE3_ASSOC)){
 $dash_ind1 = "";
 $graf_ind1 = "";
 $tab_ind1 = "";
-if (file_exists("resumo/r_ind1_".$_SESSION['key'].".php")){
-	require_once("resumo/r_ind1_".$_SESSION['key'].".php");
+if (file_exists("resumo/r_ind1_".$_SESSION['login'].".php")){
+	require_once("resumo/r_ind1_".$_SESSION['login'].".php");
 	$cor1 = "bg-danger";
 	$cor11 = "#DC3545"; // vermelho
 	if (ceil($num_prc_1) >= 16 && ceil($num_prc_1) < 28){
@@ -149,8 +149,8 @@ if (file_exists("resumo/r_ind1_".$_SESSION['key'].".php")){
 $dash_ind2 = "";
 $graf_ind2 = "";
 $tab_ind2 = "";
-if (file_exists("resumo/r_ind2_".$_SESSION['key'].".php")){
-	require_once("resumo/r_ind2_".$_SESSION['key'].".php");
+if (file_exists("resumo/r_ind2_".$_SESSION['login'].".php")){
+	require_once("resumo/r_ind2_".$_SESSION['login'].".php");
 	$cor2 = "bg-danger";
 	$cor22 = "#DC3545";
 	if (ceil($num_prc_2) >= 16 && ceil($num_prc_2) < 28){
@@ -273,8 +273,8 @@ if (file_exists("resumo/r_ind2_".$_SESSION['key'].".php")){
 $dash_ind3 = "";
 $graf_ind3 = "";
 $tab_ind3 = "";
-if (file_exists("resumo/r_ind3_".$_SESSION['key'].".php")){
-	require_once("resumo/r_ind3_".$_SESSION['key'].".php");
+if (file_exists("resumo/r_ind3_".$_SESSION['login'].".php")){
+	require_once("resumo/r_ind3_".$_SESSION['login'].".php");
 	$cor3 = "bg-danger";
 	$cor33 = "#DC3545";
 	if (ceil($num_prc_3) >= 16 && ceil($num_prc_3) < 28){
@@ -388,8 +388,8 @@ if (file_exists("resumo/r_ind3_".$_SESSION['key'].".php")){
 $dash_ind4 = "";
 $graf_ind4 = "";
 $tab_ind4 = "";
-if (file_exists("resumo/r_ind4_".$_SESSION['key'].".php")){
-	require_once("resumo/r_ind4_".$_SESSION['key'].".php");
+if (file_exists("resumo/r_ind4_".$_SESSION['login'].".php")){
+	require_once("resumo/r_ind4_".$_SESSION['login'].".php");
 	$cor4 = "bg-danger";
 	$cor44 = "#DC3545";
 	if (ceil($num_prc_4) >= 16 && ceil($num_prc_4) < 28){
@@ -503,8 +503,8 @@ if (file_exists("resumo/r_ind4_".$_SESSION['key'].".php")){
 $dash_ind5 = "";
 $graf_ind5 = "";
 $tab_ind5 = "";
-if (file_exists("resumo/r_ind5_".$_SESSION['key'].".php")){
-	require_once("resumo/r_ind5_".$_SESSION['key'].".php");
+if (file_exists("resumo/r_ind5_".$_SESSION['login'].".php")){
+	require_once("resumo/r_ind5_".$_SESSION['login'].".php");
 	$cor5 = "bg-danger";
 	$cor55 = "#DC3545";
 	if (ceil($num_prc_5) >= 16 && ceil($num_prc_5) < 28){
@@ -650,8 +650,8 @@ if (file_exists("resumo/r_ind5_".$_SESSION['key'].".php")){
 $dash_ind6 = "";
 $graf_ind6 = "";
 $tab_ind6 = "";
-if (file_exists("resumo/r_ind6_".$_SESSION['key'].".php")){
-	require_once("resumo/r_ind6_".$_SESSION['key'].".php");
+if (file_exists("resumo/r_ind6_".$_SESSION['login'].".php")){
+	require_once("resumo/r_ind6_".$_SESSION['login'].".php");
 	$cor6 = "bg-danger";
 	$cor66 = "#DC3545";
 	if (ceil($num_prc_6) >= 16 && ceil($num_prc_6) < 28){
@@ -765,8 +765,8 @@ if (file_exists("resumo/r_ind6_".$_SESSION['key'].".php")){
 $dash_ind7 = "";
 $graf_ind7 = "";
 $tab_ind7 = "";
-if (file_exists("resumo/r_ind7_".$_SESSION['key'].".php")){
-	require_once("resumo/r_ind7_".$_SESSION['key'].".php");
+if (file_exists("resumo/r_ind7_".$_SESSION['login'].".php")){
+	require_once("resumo/r_ind7_".$_SESSION['login'].".php");
 	$cor7 = "bg-danger";
 	$cor77 = "#DC3545";
 	if (ceil($num_prc_7) >= 16 && ceil($num_prc_7) < 28){

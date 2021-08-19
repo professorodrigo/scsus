@@ -9,7 +9,7 @@
 require_once('session.php');
 $sw_db = "?";
 $db = new SQLite3('db/scsus.db');
-$result = $db->query("SELECT * FROM banco WHERE id = '".$_SESSION['key']."'");
+$result = $db->query("SELECT * FROM banco WHERE id = '".$_SESSION['login']."'");
 while($array = $result->fetchArray(SQLITE3_ASSOC)){
 	$dbhost = $array['dbhost'];
 	$dbport = $array['dbport'];
@@ -513,10 +513,12 @@ $sw_db = $dbdb;
             <a href="#" onclick="$('#main-body').load('frm_dados.php');return false;" class="nav-link">
               <i class="nav-icon fas fa-tools"></i>
               <p>
-                Configurações
+                Município
               </p>
             </a>
           </li>
+		  
+		  
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-upload"></i>
@@ -550,6 +552,8 @@ $sw_db = $dbdb;
               </li>
             </ul>
           </li>
+		  
+		  <!--
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-download"></i>
@@ -567,6 +571,8 @@ $sw_db = $dbdb;
               </li>
             </ul>
           </li>
+		  -->
+		  
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
@@ -591,14 +597,18 @@ $sw_db = $dbdb;
 				  </p>
 				</a>
 				<ul class="nav nav-treeview">
+				
+				  <!--
 				  <li class="nav-item">
 					<a href="#" class="nav-link">
 					  <i class="fas fa-receipt nav-icon"></i>
 					  <p><small>Profissionais</small></p>
 					</a>
 				  </li>
+				  -->
+				  
 				  <li class="nav-item">
-					<a href="#" class="nav-link">
+					<a href="#" onclick="$('#main-body').load('tabela_imu.php');return false;" class="nav-link">
 					  <i class="fas fa-receipt nav-icon"></i>
 					  <p><small>Imunobiológicos</small></p>
 					</a>
@@ -646,7 +656,7 @@ $sw_db = $dbdb;
 				  <li class="nav-item">
 					<a href="#" onclick="$('#main-body').load('tabela2.php?ap=procedimentos');return false;" class="nav-link">
 					  <i class="fas fa-receipt nav-icon"></i>
-					  <p>Procedimentos</p>
+					  <p><small>Procedimentos</small></p>
 					</a>
 				  </li>
 				  <li class="nav-item">
@@ -676,6 +686,57 @@ $sw_db = $dbdb;
 				</ul>
 			  </li> 
             </ul>
+          </li> 
+<?php
+if ($_SESSION['perfil'] == "admin"){
+	echo "
+          <li class=\"nav-item\">
+            <a href=\"#\" class=\"nav-link\">
+              <i class=\"nav-icon fas fa-users-cog\"></i>
+              <p>
+                Usuários
+                <i class=\"right fas fa-angle-left\"></i>
+              </p>
+            </a>
+            <ul class=\"nav nav-treeview\">
+              <li class=\"nav-item\">
+                <a href=\"#\" onclick=\"$('#main-body').load('pg_usuarios.php');return false;\" class=\"nav-link\">
+                  <i class=\"fas fa-users nav-icon\"></i>
+                  <p>Usuários</p>
+                </a>
+              </li>
+            </ul>
+            <ul class=\"nav nav-treeview\">
+              <li class=\"nav-item\">
+                <a href=\"#\" onclick=\"$('#main-body').load('frm_usuario_n.php');return false;\" class=\"nav-link\">
+                  <i class=\"fas fa-user-plus nav-icon\"></i>
+                  <p>Criar usuário</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+	";
+}
+if ($_SESSION['login'] == "admin"){
+	echo "
+          <li class=\"nav-item\">
+            <a href=\"#\" onclick=\"$('#main-body').load('frm_config.php');return false;\" class=\"nav-link\">
+              <i class=\"nav-icon fas fa-tools\"></i>
+              <p>
+                Configuração
+              </p>
+            </a>
+          </li>
+	";
+}
+?>
+          <li class="nav-item">
+            <a href="#" onclick="$('#main-body').load('frm_perfil.php');return false;" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Perfil
+              </p>
+            </a>
           </li>
           <li class="nav-item">
             <a href="#" onclick="$('#main-body').load('pg_doe.php');return false;" class="nav-link">
@@ -731,7 +792,7 @@ $sw_db = $dbdb;
             </ul>
           </li>
           <li class="nav-item">
-            <a href="exit.php" class="nav-link">
+            <a href="sair.php" class="nav-link">
               <i class="nav-icon fas fa-power-off"></i>
               <p>
                 SAIR

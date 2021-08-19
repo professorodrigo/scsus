@@ -19,6 +19,12 @@ $cbend3 = isset($_POST["cbend3"]) ? trim($_POST["cbend3"]) : "CEP 98732-980";
 $cbend4 = isset($_POST["cbend4"]) ? trim($_POST["cbend4"]) : "Sao Matheus do Oeste Mineiro - MG";
 $cbcont1 = isset($_POST["cbcont1"]) ? trim($_POST["cbcont1"]) : "+55 (47) 23432-9384 | +55 (47) 12384-3234";
 $cbcont2 = isset($_POST["cbcont2"]) ? trim($_POST["cbcont2"]) : "contatosaude@saomatheus.gov.br | www.saomatheuspref.gov.br";
+$ibge = isset($_POST["ibge"]) ? trim($_POST["ibge"]) : "0";
+$popibge = isset($_POST["popibge"]) ? trim($_POST["popibge"]) : "0";
+$poppar = isset($_POST["poppar"]) ? trim($_POST["poppar"]) : "0";
+$popesf = isset($_POST["popesf"]) ? trim($_POST["popesf"]) : "0";
+$classmun = isset($_POST["classmun"]) ? trim($_POST["classmun"]) : "Urbano";
+
 
 $update = "
 	UPDATE dados
@@ -28,8 +34,13 @@ $update = "
 		   cbend3 = '".$cbend3."',
 		   cbend4 = '".$cbend4."',
 		   cbcont1 = '".$cbcont1."',
-		   cbcont2 = '".$cbcont2."'
-	 WHERE id = '".$_SESSION['key']."';
+		   cbcont2 = '".$cbcont2."',
+		   ibge = ".$ibge.",
+		   popibge = ".$popibge.",
+		   poppar = ".$poppar.",
+		   popesf = ".$popesf.",
+		   classmun = '".$classmun."' 
+	WHERE id = '".$_SESSION['login']."';
 ";
 $run_estrutura = $db->query($update);
 $ctrli = 1;

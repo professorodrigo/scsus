@@ -9,10 +9,10 @@
 require_once('session.php');
 
 $db = new SQLite3('db/scsus.db');
-$rows = $db->query("SELECT COUNT(*) as count FROM dados WHERE id = '".$_SESSION['key']."'");
+$rows = $db->query("SELECT COUNT(*) as count FROM dados WHERE id = '".$_SESSION['login']."'");
 $row = $rows->fetchArray();
 if ($row['count'] > 0){
-	$result = $db->query("SELECT * FROM dados WHERE id = '".$_SESSION['key']."'");
+	$result = $db->query("SELECT * FROM dados WHERE id = '".$_SESSION['login']."'");
 	while($array = $result->fetchArray(SQLITE3_ASSOC)){
 		$cbnome = $array['cbnome'];
 		$cbend1 = $array['cbend1'];
@@ -21,6 +21,11 @@ if ($row['count'] > 0){
 		$cbend4 = $array['cbend4'];
 		$cbcont1 = $array['cbcont1'];
 		$cbcont2 = $array['cbcont2'];
+		$ibge = $array['ibge'];
+		$popibge = $array['popibge'];
+		$poppar = $array['poppar'];
+		$popesf = $array['popesf'];
+		$classmun = $array['classmun'];
 	}
 } else {
 	$cbnome = "Secretaria Municipal de Saúde de Teste";
@@ -30,6 +35,11 @@ if ($row['count'] > 0){
 	$cbend4 = "São Matheus do Oeste Mineiro - MG";
 	$cbcont1 = "+55 (47) 23432-9384 | +55 (47) 12384-3234";
 	$cbcont2 = "contatosaude@saomatheus.gov.br | www.saomatheuspref.gov.br";
+	$ibge = "0";
+	$popibge = "0";
+	$poppar = "0";
+	$popesf = "0";
+	$classmun = "classificacao";
 }
 
 ?>
@@ -95,6 +105,80 @@ if ($row['count'] > 0){
                     <label for="cbcont2">Contato linha 2</label>
                     <input type="text" name="cbcont2" class="form-control" id="cbcont2" value="<?php echo $cbcont2;?>">
                   </div>
+				  
+				  
+                  <div class="form-group">
+                    <label for="ibge">Número IBGE do município</label>
+                    <input type="text" name="ibge" class="form-control" id="ibge" value="<?php echo $ibge;?>">
+                  </div>
+                  <div class="form-group">
+                    <label for="popibge">População segundo o IBGE</label>
+                    <input type="text" name="popibge" class="form-control" id="popibge" value="<?php echo $popibge;?>">
+                  </div>
+                  <div class="form-group">
+                    <label for="poppar">População (Parâmetro)</label>
+                    <input type="text" name="poppar" class="form-control" id="poppar" value="<?php echo $poppar;?>">
+                  </div>
+                  <div class="form-group">
+                    <label for="popesf">População (Esforço)</label>
+                    <input type="text" name="popesf" class="form-control" id="popesf" value="<?php echo $popesf;?>">
+                  </div>
+                  <div class="form-group">
+                    <label>Classificação do município</label>
+                      <select class="form-control" name="classmun" id="classmun">
+						<?php
+						if ($classmun == 'Urbano'){
+							echo "
+							  <option value=\"Urbano\" selected>Urbano</option>
+							  <option value=\"IntermediarioAdjacente\">Intermediário Adjacente</option>
+							  <option value=\"RuralRemoto\">Rural Remoto</option>
+							  <option value=\"RuralAdjacente\">Rural Adjacente</option>
+							";
+						} else {
+							if ($classmun == 'IntermediarioAdjacente'){
+								echo "
+								  <option value=\"Urbano\">Urbano</option>
+								  <option value=\"IntermediarioAdjacente\" selected>Intermediário Adjacente</option>
+								  <option value=\"RuralRemoto\">Rural Remoto</option>
+								  <option value=\"RuralAdjacente\">Rural Adjacente</option>
+								";
+							} else {
+								if ($classmun == 'RuralRemoto'){
+									echo "
+									  <option value=\"Urbano\">Urbano</option>
+									  <option value=\"IntermediarioAdjacente\">Intermediário Adjacente</option>
+									  <option value=\"RuralRemoto\" selected>Rural Remoto</option>
+									  <option value=\"RuralAdjacente\">Rural Adjacente</option>
+									";
+								} else {
+									if ($classmun == 'RuralAdjacente'){
+										echo "
+										  <option value=\"Urbano\">Urbano</option>
+										  <option value=\"IntermediarioAdjacente\">Intermediário Adjacente</option>
+										  <option value=\"RuralRemoto\">Rural Remoto</option>
+										  <option value=\"RuralAdjacente\" selected>Rural Adjacente</option>
+										";
+									} else {
+										echo "
+										  <option value=\"Urbano\" selected>Urbano</option>
+										  <option value=\"IntermediarioAdjacente\">Intermediário Adjacente</option>
+										  <option value=\"RuralRemoto\">Rural Remoto</option>
+										  <option value=\"RuralAdjacente\">Rural Adjacente</option>
+										";
+									}
+								}
+							}
+						}
+						?>
+                    </select>
+					Para mais informações entre no site: https://www.conasems.org.br/painel/previne-brasil-resultado-2020/<br>
+					Escolha o estado e o município<br>
+					Assim é possivel ter um panorama de dados do município como, por exemplo, a classificação.<br>
+					Também em: https://www.conasems.org.br/painel/cadastroab/<br>
+					Escolha o estado e o município.
+                  </div>
+				  
+				  
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">

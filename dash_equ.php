@@ -10,7 +10,7 @@ require_once('session.php');
 require_once('functions.php');
 
 $db = new SQLite3('db/scsus.db');
-$result = $db->query("SELECT * FROM dados WHERE id = '".$_SESSION['key']."'");
+$result = $db->query("SELECT * FROM dados WHERE id = '".$_SESSION['login']."'");
 while($array = $result->fetchArray(SQLITE3_ASSOC)){
 	$cbnome = $array['cbnome'];
 	$cbend1 = $array['cbend1'];
@@ -22,8 +22,8 @@ while($array = $result->fetchArray(SQLITE3_ASSOC)){
 }
 
 $tab_ind1 = "";
-if (file_exists("resumo/r_ind1_".$_SESSION['key'].".php")){
-	require_once("resumo/r_ind1_".$_SESSION['key'].".php");
+if (file_exists("resumo/r_ind1_".$_SESSION['login'].".php")){
+	require_once("resumo/r_ind1_".$_SESSION['login'].".php");
 	$tab_ind1 = "
     <div class=\"card\">
       <div class=\"card-header\">
@@ -136,8 +136,8 @@ if (file_exists("resumo/r_ind1_".$_SESSION['key'].".php")){
 //****************************************************************************************************************
 //****************************************************************************************************************
 $tab_ind2 = "";
-if (file_exists("resumo/r_ind2_".$_SESSION['key'].".php")){
-	require_once("resumo/r_ind2_".$_SESSION['key'].".php");
+if (file_exists("resumo/r_ind2_".$_SESSION['login'].".php")){
+	require_once("resumo/r_ind2_".$_SESSION['login'].".php");
 	$tab_ind2 = "
     <div class=\"card\">
       <div class=\"card-header\">
@@ -250,8 +250,8 @@ if (file_exists("resumo/r_ind2_".$_SESSION['key'].".php")){
 //****************************************************************************************************************
 //****************************************************************************************************************
 $tab_ind3 = "";
-if (file_exists("resumo/r_ind3_".$_SESSION['key'].".php")){
-	require_once("resumo/r_ind3_".$_SESSION['key'].".php");
+if (file_exists("resumo/r_ind3_".$_SESSION['login'].".php")){
+	require_once("resumo/r_ind3_".$_SESSION['login'].".php");
 	$tab_ind3 = "
     <div class=\"card\">
       <div class=\"card-header\">
@@ -364,8 +364,8 @@ if (file_exists("resumo/r_ind3_".$_SESSION['key'].".php")){
 //****************************************************************************************************************
 //****************************************************************************************************************
 $tab_ind4 = "";
-if (file_exists("resumo/r_ind4_".$_SESSION['key'].".php")){
-	require_once("resumo/r_ind4_".$_SESSION['key'].".php");
+if (file_exists("resumo/r_ind4_".$_SESSION['login'].".php")){
+	require_once("resumo/r_ind4_".$_SESSION['login'].".php");
 	$tab_ind4 = "
     <div class=\"card\">
       <div class=\"card-header\">
@@ -478,8 +478,8 @@ if (file_exists("resumo/r_ind4_".$_SESSION['key'].".php")){
 //****************************************************************************************************************
 //****************************************************************************************************************
 $tab_ind5 = "";
-if (file_exists("resumo/r_ind5_".$_SESSION['key'].".php")){
-	require_once("resumo/r_ind5_".$_SESSION['key'].".php");
+if (file_exists("resumo/r_ind5_".$_SESSION['login'].".php")){
+	require_once("resumo/r_ind5_".$_SESSION['login'].".php");
 	$tab_ind5 = "
     <div class=\"card\">
       <div class=\"card-header\">
@@ -592,8 +592,8 @@ if (file_exists("resumo/r_ind5_".$_SESSION['key'].".php")){
 //****************************************************************************************************************
 //****************************************************************************************************************
 $tab_ind6 = "";
-if (file_exists("resumo/r_ind6_".$_SESSION['key'].".php")){
-	require_once("resumo/r_ind6_".$_SESSION['key'].".php");
+if (file_exists("resumo/r_ind6_".$_SESSION['login'].".php")){
+	require_once("resumo/r_ind6_".$_SESSION['login'].".php");
 	$tab_ind6 = "
     <div class=\"card\">
       <div class=\"card-header\">
@@ -706,8 +706,8 @@ if (file_exists("resumo/r_ind6_".$_SESSION['key'].".php")){
 //****************************************************************************************************************
 //****************************************************************************************************************
 $tab_ind7 = "";
-if (file_exists("resumo/r_ind7_".$_SESSION['key'].".php")){
-	require_once("resumo/r_ind7_".$_SESSION['key'].".php");
+if (file_exists("resumo/r_ind7_".$_SESSION['login'].".php")){
+	require_once("resumo/r_ind7_".$_SESSION['login'].".php");
 	$tab_ind7 = "
     <div class=\"card\">
       <div class=\"card-header\">
