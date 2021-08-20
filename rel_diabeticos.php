@@ -2149,11 +2149,17 @@ if ($paginacao <= 0 || $nm_sql_2 == 0){
 	$porc_ind = 0;
 	if ($denominador_final > 0){
 		$porc_ind = (100 * $numerador_ind7) / $denominador_final;
+		if ($porc_ind > 100){
+			$porc_ind = 100;
+		}
 	}
 	$porc_ind_est = 0;
 	$deno_esti = "";
 	if ($des > 0){
 		$porc_ind_est = (100 * $numerador_ind7) / $des;
+		if ($porc_ind_est > 100){
+			$porc_ind_est = 100;
+		}
 		$deno_esti = "(Estimado: ".$des.")";
 	}
 	$txind = "<?php

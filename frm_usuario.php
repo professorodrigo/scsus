@@ -261,7 +261,8 @@ $(function () {
 			//$('.content-wrapper').html(data); 
 		});
 		$('#main-body').load('frm_usuario.php?ulg=<?php echo $ulg;?>');
-		alert( "Gravado com sucesso!" );
+		//alert( "Gravado com sucesso!" );
+		swal.fire('Ok!','Gravado com sucesso!','success');
 		
 	},
     rules: {

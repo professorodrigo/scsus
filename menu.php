@@ -67,12 +67,18 @@ $sw_db = $dbdb;
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" onclick="$('#main-body').load('prep.php?ap=rel_gestantes');return false;" class="nav-link">
-                  <i class="fas fa-chart-line nav-icon text-warning"></i>
+<?php
+if ($_SESSION['perfil'] != "demo"){
+	echo "
+              <li class=\"nav-item\">
+                <a href=\"#\" onclick=\"$('#main-body').load('prep.php?ap=rel_gestantes');return false;\" class=\"nav-link\">
+                  <i class=\"fas fa-chart-line nav-icon text-warning\"></i>
                   <p>Indicadores 1, 2 e 3 <small>[gerar]</small></p>
                 </a>
               </li>
+	";
+}
+?>
               <li class="nav-item">
                 <a href="#" onclick="$('#main-body').load('ver.php?ap=rel_gestantes');return false;" class="nav-link">
                   <i class="fas fa-fighter-jet nav-icon text-info"></i>
@@ -85,12 +91,18 @@ $sw_db = $dbdb;
                   <p>Filtro</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="#" onclick="$('#main-body').load('frm_gestantes.php');return false;" class="nav-link">
-                  <i class="fas fa-wrench nav-icon text-info"></i>
+<?php
+if ($_SESSION['perfil'] != "demo"){
+	echo "
+              <li class=\"nav-item\">
+                <a href=\"#\" onclick=\"$('#main-body').load('frm_gestantes.php');return false;\" class=\"nav-link\">
+                  <i class=\"fas fa-wrench nav-icon text-info\"></i>
                   <p>Configurações</p>
                 </a>
               </li>
+	";
+}
+?>
 			  <li class="nav-item">
 				<a href="#" class="nav-link">
 				  <i class="nav-icon fas fa-file-csv"></i>
@@ -131,12 +143,18 @@ $sw_db = $dbdb;
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" onclick="$('#main-body').load('prep.php?ap=rel_mulheres');return false;" class="nav-link">
-                  <i class="fas fa-chart-line nav-icon text-warning"></i>
+<?php
+if ($_SESSION['perfil'] != "demo"){
+	echo "
+              <li class=\"nav-item\">
+                <a href=\"#\" onclick=\"$('#main-body').load('prep.php?ap=rel_mulheres');return false;\" class=\"nav-link\">
+                  <i class=\"fas fa-chart-line nav-icon text-warning\"></i>
                   <p>Indicador 4 <small>[gerar]</small></p>
                 </a>
               </li>
+	";
+}
+?>
               <li class="nav-item">
                 <a href="#" onclick="$('#main-body').load('ver.php?ap=rel_mulheres');return false;" class="nav-link">
                   <i class="fas fa-fighter-jet nav-icon text-info"></i>
@@ -149,12 +167,18 @@ $sw_db = $dbdb;
                   <p>Filtro</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="#" onclick="$('#main-body').load('frm_mulheres.php');return false;" class="nav-link">
-                  <i class="fas fa-wrench nav-icon text-info"></i>
+<?php
+if ($_SESSION['perfil'] != "demo"){
+	echo "
+              <li class=\"nav-item\">
+                <a href=\"#\" onclick=\"$('#main-body').load('frm_mulheres.php');return false;\" class=\"nav-link\">
+                  <i class=\"fas fa-wrench nav-icon text-info\"></i>
                   <p>Configurações</p>
                 </a>
               </li>
+	";
+}
+?>
 			  <li class="nav-item">
 				<a href="#" class="nav-link">
 				  <i class="nav-icon fas fa-file-csv"></i>
@@ -187,12 +211,18 @@ $sw_db = $dbdb;
 				  </p>
 				</a>
 				<ul class="nav nav-treeview">
-				  <li class="nav-item">
-					<a href="#" onclick="$('#main-body').load('prep.php?ap=rel_exames');return false;" class="nav-link">
-					  <i class="fas fa-stethoscope nav-icon  text-warning"></i>
+<?php
+if ($_SESSION['perfil'] != "demo"){
+	echo "
+				  <li class=\"nav-item\">
+					<a href=\"#\" onclick=\"$('#main-body').load('prep.php?ap=rel_exames');return false;\" class=\"nav-link\">
+					  <i class=\"fas fa-stethoscope nav-icon  text-warning\"></i>
 					  <p>Exames <small>[gerar]</small></p>
 					</a>
 				  </li>
+	";
+}
+?>
 				  <li class="nav-item">
 					<a href="#" onclick="$('#main-body').load('ver.php?ap=rel_exames');return false;" class="nav-link">
 					  <i class="fas fa-fighter-jet nav-icon text-info"></i>
@@ -241,12 +271,18 @@ $sw_db = $dbdb;
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" onclick="$('#main-body').load('prep.php?ap=rel_criancas');return false;" class="nav-link">
-                  <i class="fas fa-chart-line nav-icon text-warning"></i>
+<?php
+if ($_SESSION['perfil'] != "demo"){
+	echo "
+              <li class=\"nav-item\">
+                <a href=\"#\" onclick=\"$('#main-body').load('prep.php?ap=rel_criancas');return false;\" class=\"nav-link\">
+                  <i class=\"fas fa-chart-line nav-icon text-warning\"></i>
                   <p>Indicador 5 <small>[gerar]</small></p>
                 </a>
               </li>
+	";
+}
+?>
               <li class="nav-item">
                 <a href="#" onclick="$('#main-body').load('ver.php?ap=rel_criancas');return false;" class="nav-link">
                   <i class="fas fa-fighter-jet nav-icon text-info"></i>
@@ -259,12 +295,18 @@ $sw_db = $dbdb;
                   <p>Filtro</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="#" onclick="$('#main-body').load('frm_vacinas.php');return false;" class="nav-link">
-                  <i class="fas fa-wrench nav-icon text-info"></i>
+<?php
+if ($_SESSION['perfil'] != "demo"){
+	echo "
+              <li class=\"nav-item\">
+                <a href=\"#\" onclick=\"$('#main-body').load('frm_vacinas.php');return false;\" class=\"nav-link\">
+                  <i class=\"fas fa-wrench nav-icon text-info\"></i>
                   <p>Configurações</p>
                 </a>
               </li>
+	";
+}
+?>
 			  <li class="nav-item">
 				<a href="#" class="nav-link">
 				  <i class="nav-icon fas fa-file-csv"></i>
@@ -297,12 +339,18 @@ $sw_db = $dbdb;
 				  </p>
 				</a>
 				<ul class="nav nav-treeview">
-				  <li class="nav-item">
-					<a href="#" onclick="$('#main-body').load('prep.php?ap=rel_vacinas');return false;" class="nav-link">
-					  <i class="fas fa-syringe nav-icon  text-warning"></i>
+<?php
+if ($_SESSION['perfil'] != "demo"){
+	echo "
+				  <li class=\"nav-item\">
+					<a href=\"#\" onclick=\"$('#main-body').load('prep.php?ap=rel_vacinas');return false;\" class=\"nav-link\">
+					  <i class=\"fas fa-syringe nav-icon  text-warning\"></i>
 					  <p>Vacinas <small>[gerar]</small></p>
 					</a>
 				  </li>
+	";
+}
+?>
 				  <li class="nav-item">
 					<a href="#" onclick="$('#main-body').load('ver.php?ap=rel_vacinas');return false;" class="nav-link">
 					  <i class="fas fa-fighter-jet nav-icon text-info"></i>
@@ -349,12 +397,18 @@ $sw_db = $dbdb;
 				  </p>
 				</a>
 				<ul class="nav nav-treeview">
-				  <li class="nav-item">
-					<a href="#" onclick="$('#main-body').load('prep.php?ap=rel_covid1');return false;" class="nav-link">
-					  <i class="fas fa-bacterium nav-icon text-warning"></i>
+<?php
+if ($_SESSION['perfil'] != "demo"){
+	echo "
+				  <li class=\"nav-item\">
+					<a href=\"#\" onclick=\"$('#main-body').load('prep.php?ap=rel_covid1');return false;\" class=\"nav-link\">
+					  <i class=\"fas fa-bacterium nav-icon text-warning\"></i>
 					  <p><small>Transparência [gerar]</small></p>
 					</a>
 				  </li>
+	";
+}
+?>
 				  <li class="nav-item">
 					<a href="#" onclick="$('#main-body').load('ver.php?ap=rel_covid1');return false;" class="nav-link">
 					  <i class="fas fa-fighter-jet nav-icon text-info"></i>
@@ -380,12 +434,18 @@ $sw_db = $dbdb;
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" onclick="$('#main-body').load('prep.php?ap=rel_hipertensos');return false;" class="nav-link">
-                  <i class="fas fa-chart-line nav-icon text-warning"></i>
+<?php
+if ($_SESSION['perfil'] != "demo"){
+	echo "
+              <li class=\"nav-item\">
+                <a href=\"#\" onclick=\"$('#main-body').load('prep.php?ap=rel_hipertensos');return false;\" class=\"nav-link\">
+                  <i class=\"fas fa-chart-line nav-icon text-warning\"></i>
                   <p>Indicador 6 <small>[gerar]</small></p>
                 </a>
               </li>
+	";
+}
+?>
               <li class="nav-item">
                 <a href="#" onclick="$('#main-body').load('ver.php?ap=rel_hipertensos');return false;" class="nav-link">
                   <i class="fas fa-fighter-jet nav-icon text-info"></i>
@@ -398,12 +458,18 @@ $sw_db = $dbdb;
                   <p>Filtro</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="#" onclick="$('#main-body').load('frm_hipertensos.php');return false;" class="nav-link">
-                  <i class="fas fa-wrench nav-icon text-info"></i>
+<?php
+if ($_SESSION['perfil'] != "demo"){
+	echo "
+              <li class=\"nav-item\">
+                <a href=\"#\" onclick=\"$('#main-body').load('frm_hipertensos.php');return false;\" class=\"nav-link\">
+                  <i class=\"fas fa-wrench nav-icon text-info\"></i>
                   <p>Configurações</p>
                 </a>
               </li>
+	";
+}
+?>
 			  <li class="nav-item">
 				<a href="#" class="nav-link">
 				  <i class="nav-icon fas fa-file-csv"></i>
@@ -444,12 +510,18 @@ $sw_db = $dbdb;
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" onclick="$('#main-body').load('prep.php?ap=rel_diabeticos');return false;" class="nav-link">
-                  <i class="fas fa-chart-line nav-icon text-warning"></i>
+<?php
+if ($_SESSION['perfil'] != "demo"){
+	echo "
+              <li class=\"nav-item\">
+                <a href=\"#\" onclick=\"$('#main-body').load('prep.php?ap=rel_diabeticos');return false;\" class=\"nav-link\">
+                  <i class=\"fas fa-chart-line nav-icon text-warning\"></i>
                   <p>Indicador 7 <small>[gerar]</small></p>
                 </a>
               </li>
+	";
+}
+?>
               <li class="nav-item">
                 <a href="#" onclick="$('#main-body').load('ver.php?ap=rel_diabeticos');return false;" class="nav-link">
                   <i class="fas fa-fighter-jet nav-icon text-info"></i>
@@ -462,12 +534,18 @@ $sw_db = $dbdb;
                   <p>Filtro</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="#" onclick="$('#main-body').load('frm_diabeticos.php');return false;" class="nav-link">
-                  <i class="fas fa-wrench nav-icon text-info"></i>
+<?php
+if ($_SESSION['perfil'] != "demo"){
+	echo "
+              <li class=\"nav-item\">
+                <a href=\"#\" onclick=\"$('#main-body').load('frm_diabeticos.php');return false;\" class=\"nav-link\">
+                  <i class=\"fas fa-wrench nav-icon text-info\"></i>
                   <p>Configurações</p>
                 </a>
               </li>
+	";
+}
+?>
 			  <li class="nav-item">
 				<a href="#" class="nav-link">
 				  <i class="nav-icon fas fa-file-csv"></i>
@@ -500,59 +578,63 @@ $sw_db = $dbdb;
             </ul>
           </li>
           <li class="nav-header">Geral</li>
-          <li class="nav-item">
-            <a href="#" onclick="$('#main-body').load('frm_db.php');return false;" class="nav-link">
-              <i class="nav-icon fas fa-database"></i>
+<?php
+if ($_SESSION['perfil'] == "admin"){
+	echo "
+          <li class=\"nav-item\">
+            <a href=\"#\" onclick=\"$('#main-body').load('frm_db.php');return false;\" class=\"nav-link\">
+              <i class=\"nav-icon fas fa-database\"></i>
               <p>
                 DB
-                <span class="badge badge-info right"><?php echo $sw_db;?></span>
+                <span class=\"badge badge-info right\">".$sw_db."</span>
               </p>
             </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" onclick="$('#main-body').load('frm_dados.php');return false;" class="nav-link">
-              <i class="nav-icon fas fa-tools"></i>
+          </li> 
+          <li class=\"nav-item\">
+            <a href=\"#\" onclick=\"$('#main-body').load('frm_dados.php');return false;\" class=\"nav-link\">
+              <i class=\"nav-icon fas fa-tools\"></i>
               <p>
                 Município
               </p>
             </a>
           </li>
-		  
-		  
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-upload"></i>
+       <li class=\"nav-item\">
+            <a href=\"#\" class=\"nav-link\">
+              <i class=\"nav-icon fas fa-upload\"></i>
               <p>
                 Importação
-                <i class="right fas fa-angle-left"></i>
+                <i class=\"right fas fa-angle-left\"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" onclick="$('#main-body').load('frm_xml.php');return false;" class="nav-link">
-                  <i class="fas fa-upload nav-icon"></i>
+            <ul class=\"nav nav-treeview\">
+              <li class=\"nav-item\">
+                <a href=\"#\" onclick=\"$('#main-body').load('frm_xml.php');return false;\" class=\"nav-link\">
+                  <i class=\"fas fa-upload nav-icon\"></i>
                   <p>CNES (xml)</p>
                 </a>
               </li>
             </ul>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" onclick="$('#main-body').load('frm_sigtap.php');return false;" class="nav-link">
-                  <i class="fas fa-upload nav-icon"></i>
+            <ul class=\"nav nav-treeview\">
+              <li class=\"nav-item\">
+                <a href=\"#\" onclick=\"$('#main-body').load('frm_sigtap.php');return false;\" class=\"nav-link\">
+                  <i class=\"fas fa-upload nav-icon\"></i>
                   <p>SIGTAP</p>
                 </a>
               </li>
             </ul>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" onclick="$('#main-body').load('frm_cbo.php');return false;" class="nav-link">
-                  <i class="fas fa-upload nav-icon"></i>
+            <ul class=\"nav nav-treeview\">
+              <li class=\"nav-item\">
+                <a href=\"#\" onclick=\"$('#main-body').load('frm_cbo.php');return false;\" class=\"nav-link\">
+                  <i class=\"fas fa-upload nav-icon\"></i>
                   <p>CBO</p>
                 </a>
               </li>
             </ul>
-          </li>
-		  
+        </li>
+	";
+}
+?>
+
 		  <!--
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -777,12 +859,18 @@ if ($_SESSION['login'] == "admin"){
                   <p>Duplicados</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="#" onclick="$('#main-body').load('frm_duplicados.php');return false;" class="nav-link">
-                  <i class="fas fa-wrench nav-icon text-info"></i>
+<?php
+if ($_SESSION['perfil'] != "demo"){
+	echo "
+              <li class=\"nav-item\">
+                <a href=\"#\" onclick=\"$('#main-body').load('frm_duplicados.php');return false;\" class=\"nav-link\">
+                  <i class=\"fas fa-wrench nav-icon text-info\"></i>
                   <p>Configurações</p>
                 </a>
               </li>
+	";
+}
+?>
               <li class="nav-item">
                 <a href="#" onclick="$('#main-body').load('verc.php?ap=duplicados_T');return false;" class="nav-link">
                   <i class="fas fa-file-csv nav-icon"></i>

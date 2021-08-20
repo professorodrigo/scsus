@@ -35,7 +35,8 @@ if ($deslogar){
 	echo "
 		<script>
 		$(function () {
-			alert('Alguem logou com seu seu usuário em outro local');
+			//alert('Alguem logou com seu seu usuário em outro local');
+			swal.fire('erro!', 'Alguem logou com seu seu usuário em outro local', 'error');
 			setTimeout(
 			  function() 
 			  {

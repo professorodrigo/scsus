@@ -115,7 +115,8 @@ $(function () {
 			//$('.content-wrapper').html(data); 
 		});
 		$('#main-menu').load('menu.php');
-		alert( "Gravado com sucesso!" );
+		//alert( "Gravado com sucesso!" );
+		swal.fire('Ok!','Gravado com sucesso!','success');
 	},
     rules: {
       dbhost: {

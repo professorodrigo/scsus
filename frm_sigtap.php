@@ -88,12 +88,14 @@ $(function () {
 			processData: false,
 			success: function(response){
 				if(response.substring(0,2) == 'Ok'){
-					alert(response);
+					//alert(response);
+					swal.fire('Ok!',response,'success');
 					//$('#main-body').load('frm_sigtap.php');
 					$('#main-body').load('proc.php?ap=proc_sigtap');
 				}
 				else{
-					alert(response);
+					//alert(response);
+					swal.fire('erro!',response,'error');
 				}
 			},
 		});

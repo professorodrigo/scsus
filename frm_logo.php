@@ -93,11 +93,13 @@ $(function () {
 			processData: false,
 			success: function(response){
 				if(response.substring(0,2) == 'Ok'){
-					alert(response);
+					//alert(response);
+					swal.fire('Ok!',response,'success');
 					$('#main-body').load('frm_logo.php');
 				}
 				else{
-					alert(response);
+					//alert(response);
+					swal.fire('erro!',response,'error');
 				}
 			},
 		});

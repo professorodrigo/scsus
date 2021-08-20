@@ -190,7 +190,8 @@ $(function () {
 			//$('.content-wrapper').html(data); 
 		});
 		$('#main-body').load('frm_perfil.php');
-		alert( "Gravado com sucesso!" );
+		//alert( "Gravado com sucesso!" );
+		swal.fire('Ok!','Gravado com sucesso!','success');
 		
 	},
     rules: {

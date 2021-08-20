@@ -302,6 +302,8 @@ if (date('Ymd') > datasomadias($dtinstall,5)){
 <script src="plugins/daterangepicker/daterangepicker.js"></script>
 <!-- bootstrap color picker -->
 <script src="plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<!-- sweetalert2 -->
+<script src="plugins/sweetalert2/sweetalert2.all.min.js"></script>
 
 <script>
 	$(document).ready(function() {

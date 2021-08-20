@@ -134,7 +134,8 @@ if ($_SESSION['login'] != $ulg){
 	  <?php
 	  if ($_SESSION['login'] == "admin"){
 		  if ($fn == 'sen'){
-			echo "alert('Nova senha: ".$tmpsenha."');"; 
+			//echo "alert('Nova senha: ".$tmpsenha."');"; 
+			echo "swal.fire('Ok!','Nova senha: ".$tmpsenha."','info');"; 
 		  }
 	  }
 	  if ($fn == 'ex'){

@@ -280,7 +280,8 @@ $(function () {
 			//$('.content-wrapper').append(data);
 			//$('.content-wrapper').html(data); 
 		});
-		alert( "Gravado com sucesso!" );
+		//alert( "Gravado com sucesso!" );
+		swal.fire('Ok!','Gravado com sucesso!','success');
 	},
     rules: {
       cfa: {

@@ -78,9 +78,11 @@ $(function () {
 		$.post('gv_senha.php', $('#formpg').serialize(), function (data, textStatus) {
 			if(data.substring(0,2) == 'Ok'){
 				$('#main-body').load('frm_perfil.php');
-				alert( "Gravado com sucesso!" );
+				//alert( "Gravado com sucesso!" );
+				swal.fire('Ok!','Gravado com sucesso!','success');
 			} else {
-				alert(data);
+				//alert(data);
+				swal.fire('erro!',data,'error');
 			}
 		});
 	},

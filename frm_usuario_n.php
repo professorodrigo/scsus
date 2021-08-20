@@ -56,19 +56,9 @@ require_once('functions.php');
                   <div class="form-group">
                     <label>Perfil</label>
                       <select class="form-control" name="perfil" id="perfil">
-						<?php
-						if ($db_perfil == 'admin'){
-							echo "
-							  <option value=\"admin\" selected>Administrador</option>
-							  <option value=\"usuario\">Usuário</option>
-							";
-						} else {
-							echo "
-							  <option value=\"admin\">Administrador</option>
-							  <option value=\"usuario\" selected>Usuário</option>
-							";
-						}
-						?>
+						<option value="admin">Administrador</option>
+						<option value="usuario" selected>Usuário</option>
+						<option value="demo">Demonstração</option>
                     </select>
                   </div>
                   <div class="form-group">
@@ -112,6 +102,7 @@ $(function () {
 	submitHandler: function (form) {
 		$.post('gv_usuario_n.php', $('#formpg').serialize(), function (data, textStatus) {
 			alert('Gravado com sucesso!\nSenha temporária: '+data);
+			swal.fire('Ok!','Gravado com sucesso!\nSenha temporária: '+data,'success');
 			$('#main-body').load('pg_usuarios.php');
 		});
 		

@@ -193,7 +193,8 @@ $(function () {
   $('#formpg').validate({
 	submitHandler: function (form) {
 		$.post('gv_config.php', $('#formpg').serialize(), function (data, textStatus) {
-			alert('Gravado com sucesso!');
+			//alert('Gravado com sucesso!');
+			swal.fire('Ok!','Gravado com sucesso!','success');
 		});
 		$('#main-body').load('frm_config.php');
 	},

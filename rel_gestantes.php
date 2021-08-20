@@ -3025,14 +3025,23 @@ if ($paginacao <= 0 || $nm_sql_2 == 0){
 	$porc_in1 = 0;
 	if ($denominador_final > 0){
 		$porc_in1 = (100 * $numerador_ind1) / $denominador_final;
+		if ($porc_in1 > 100){
+			$porc_in1 = 100;
+		}
 	}
 	$porc_in2 = 0;
 	if ($denominador_final > 0){
 		$porc_in2 = (100 * $numerador_ind2) / $denominador_final;
+		if ($porc_in2 > 100){
+			$porc_in2 = 100;
+		}
 	}
 	$porc_in3 = 0;
 	if ($denominador_final > 0){
 		$porc_in3 = (100 * $numerador_ind3) / $denominador_final;
+		if ($porc_in3 > 100){
+			$porc_in3 = 100;
+		}
 	}
 	$porc_in1_est = 0;
 	$porc_in2_est = 0;
@@ -3042,6 +3051,15 @@ if ($paginacao <= 0 || $nm_sql_2 == 0){
 		$porc_in1_est = (100 * $numerador_ind1) / $des;
 		$porc_in2_est = (100 * $numerador_ind2) / $des;
 		$porc_in3_est = (100 * $numerador_ind3) / $des;
+		if ($porc_in1_est > 100){
+			$porc_in1_est = 100;
+		}
+		if ($porc_in2_est > 100){
+			$porc_in2_est = 100;
+		}
+		if ($porc_in3_est > 100){
+			$porc_in3_est = 100;
+		}
 		$deno_esti = "(Estimado: ".$des.")";
 	}
 	$txind1 = "<?php

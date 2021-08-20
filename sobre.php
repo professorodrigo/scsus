@@ -8,9 +8,9 @@
 
 $sobre = array();
 	$sobre['nome'] = "sc-SUS";
-	$sobre['versao'] = "5.0.5";
-	$sobre['versimp'] = "505";
-	$sobre['alteracao'] = "19/08/2021";
+	$sobre['versao'] = "5.0.6";
+	$sobre['versimp'] = "506";
+	$sobre['alteracao'] = "20/08/2021";
 	$sobre['repositorio1'] = "https://github.com/professorodrigo/scsus";
 	$sobre['repositorio2'] = "https://sourceforge.net/projects/sc-sus/";
 	$sobre['ferramentas'] = "https://drive.google.com/drive/folders/1G5ioi_bKRk5I4BTCy0A3rJFSTxQ1JQ2B";

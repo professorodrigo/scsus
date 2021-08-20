@@ -51,7 +51,7 @@ include('idb1.php');
     </div>
     <div class="card-body">
       <p class="login-box-msg">Informe os dados para entrar no sistema</p>
-
+		<div id="mensagem"></div>
       <form method="post" action="#" id="formlogin" name="formlogin">
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Usuário" name="login" id="login">
@@ -85,24 +85,27 @@ include('idb1.php');
   <!-- /.card -->
 </div>
 <!-- /.login-box -->
-<div id="mensagem"></div>
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
+<!-- sweetalert2 -->
+<script src="plugins/sweetalert2/sweetalert2.all.min.js"></script>
 <script>
 	$(function () {
 		$("#entrar").click(function() {
 			var mensagem = "";
 			var submit = true;
 			if (document.forms["formlogin"]["login"].value == ''){
-				mensagem = mensagem + "Campo 'Usuário' é necessário!<br>";
+				//mensagem = mensagem + "Campo 'Usuário' é necessário!<br>";
+				mensagem = mensagem + "<div class='alert alert-danger' role='alert'>Campo Login é necessário!</div>";
 				submit = false;
 			}
 			if (document.forms["formlogin"]["senha"].value == ''){
-				mensagem = mensagem + "Campo 'Senha' é necessário!<br>";
+				//mensagem = mensagem + "Campo 'Senha' é necessário!<br>";
+				mensagem = mensagem + "<div class='alert alert-danger' role='alert'>Campo 'Senha' é necessário!</div>";
 				submit = false;
 			}
 			if (!submit){
@@ -117,7 +120,8 @@ include('idb1.php');
 						if (response == 'Ok'){
 							top.location.href = 'principal.php';
 						} else {
-							document.getElementById("mensagem").innerHTML = response;
+							//document.getElementById("mensagem").innerHTML = response;
+							swal.fire("erro!", response, "error");
 						}
 					},
 				});

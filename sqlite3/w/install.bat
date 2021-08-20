@@ -38,4 +38,11 @@ IF EXIST "%PROGRAMFILES(X86)%" (GOTO 64BIT) ELSE (GOTO 32BIT)
 	GOTO END
 :END
 
+echo. >> C:\xampp\php\php.ini
+echo extension=sqlite3 >> C:\xampp\php\php.ini
+echo extension=pdo_pgsql >> C:\xampp\php\php.ini
+echo extension=pdo_sqlite >> C:\xampp\php\php.ini
+echo extension=pgsql >> C:\xampp\php\php.ini
 
+C:\xampp\apache_stop.bat
+C:\xampp\apache_start.bat
